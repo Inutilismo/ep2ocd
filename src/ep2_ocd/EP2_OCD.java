@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class EP2_OCD {
 
-    static List<Instrucao> MemoriaPrincipalAssembly = new ArrayList<>();
-    static List<Object> MemoriaPrincipalBinario = new ArrayList<>();
-    static Map<String,String> label = new HashMap<>();	//chave é o nome do label e o valor eh a posicao da memoria para a qual ele aponta
+    public static List<Instrucao> MemoriaPrincipalAssembly = new ArrayList<>();
+    public static List<Object> MemoriaPrincipalBinario = new ArrayList<>();
+    public static Map<String,Integer> label = new HashMap<>();	//chave ï¿½ o nome do label e o valor eh a posicao da memoria para a qual ele aponta
     
-    static List<String> codigo = new ArrayList<>();
+    // public static List<String> codigo = new ArrayList<>();
     
     public static void main(String[] args) {
     	
@@ -115,7 +115,7 @@ public class EP2_OCD {
     				newIn.parametro3 = "000000000";
     			}
     			
-    			case "lw": {		//quando criarmos os vetores na memória, temos que salvar o indexOf da 1° posição deles no ArrayList
+    			case "lw": {		//quando criarmos os vetores na memï¿½ria, temos que salvar o indexOf da 1ï¿½ posiï¿½ï¿½o deles no ArrayList
     				newIn.opcode = "00110";
     				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
     				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
@@ -123,7 +123,7 @@ public class EP2_OCD {
     				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
     				else throw new InputMismatchException("Parametro invalido");
     				
-    				String[] x = in.parametro2.split(" ");	//[16,(endereço de memória que indica o label)]
+    				String[] x = in.parametro2.split(" ");	//[16,(endereï¿½o de memï¿½ria que indica o label)]
     				x[1] = x[1].substring(1, x[1].length()-1);
     				
     				int aux = Integer.parseInt(x[0])/4;
@@ -140,7 +140,7 @@ public class EP2_OCD {
     				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
     				else throw new InputMismatchException("Parametro invalido");
     				
-    				String[] x = in.parametro2.split(" ");	//[16,(endereço de memória que indica o label)]
+    				String[] x = in.parametro2.split(" ");	//[16,(endereï¿½o de memï¿½ria que indica o label)]
     				x[1] = x[1].substring(1, x[1].length()-1);
     				
     				int aux = Integer.parseInt(x[0])/4;
@@ -280,8 +280,10 @@ public class EP2_OCD {
     				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
     				else throw new InputMismatchException("Parametro invalido");
     				
-    				newIn.parametro2 = Integer.toBinaryString(Integer.parseInt(label.get(in.parametro2)));
-    			}
+    				newIn.parametro2 = Integer.toBinaryString(label.get(in.parametro2));
+				}
+				
+				MemoriaPrincipalBinario.add(newIn);
     		}
     	}
     }

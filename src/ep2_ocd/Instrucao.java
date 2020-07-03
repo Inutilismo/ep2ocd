@@ -6,9 +6,7 @@ class Instrucao {
     public String parametro2;
     public String parametro3;
 
-    public Instrucao () {
-    	
-    }
+    public Instrucao(){}
     
     public Instrucao(String opcode, String parametro1, String parametro2, String parametro3) {
         this.opcode = opcode;
