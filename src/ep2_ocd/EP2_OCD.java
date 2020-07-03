@@ -1,13 +1,17 @@
 package ep2_ocd;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 
 public class EP2_OCD {
 
     static List<Instrucao> MemoriaPrincipalAssembly = new ArrayList<>();
     static List<Object> MemoriaPrincipalBinario = new ArrayList<>();
+    static Map<String,String> label = new HashMap<>();	//chave é o nome do label e o valor eh a posicao da memoria para a qual ele aponta
+    
     static List<String> codigo = new ArrayList<>();
     
     public static void main(String[] args) {
@@ -265,6 +269,18 @@ public class EP2_OCD {
     				if(in.parametro3 == "$s3") newIn.parametro3 = "000000011";
     				if(in.parametro3 == "$s4") newIn.parametro3 = "000000100";  
     				else throw new InputMismatchException("Parametro invalido");    				
+    			}
+    			
+    			case "la": {
+    				newIn.opcode = "01111";
+    				
+    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
+    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
+    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
+    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
+    				else throw new InputMismatchException("Parametro invalido");
+    				
+    				newIn.parametro2 = Integer.toBinaryString(Integer.parseInt(label.get(in.parametro2)));
     			}
     		}
     	}
