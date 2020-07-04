@@ -52,6 +52,7 @@ public class Main {
 	 */
 	private void initialize() {
 //		final String fileName = "";
+//		frame.setVisible(true);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 361);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +104,13 @@ public class Main {
 
 				ProcessamentoTxt(fileName);
 
-				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");
+				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");//popup com mensagem de sucesso
+				
+				frame.setVisible(false);//nao mostra mais a tela anterior
+				
+				Janela2 janela = new Janela2();
+				janela.initialize();//roda a janela 2
+				
 
 				/*
 				 * 
