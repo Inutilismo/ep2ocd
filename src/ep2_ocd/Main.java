@@ -103,6 +103,11 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {	
 
 				ProcessamentoTxt(fileName);
+				EP2_OCD.traduzAssembly();
+				System.out.println("-------------------------------------");
+				for(Object o : EP2_OCD.MemoriaPrincipalBinario) {
+					System.out.println(o);
+				}
 
 				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");//popup com mensagem de sucesso
 				
@@ -145,46 +150,93 @@ public class Main {
 					
 					while(!x.contains(".text")) {
 						
-						String[] aux = x.split(": .word ");//na declaracao de vetores, eh necessario que seja utilizado 'nomedovetor: .word'
-						// 3,4,5,6
+						
+						//split utilizado para separar o nome do vetor dos valores do mesmo
+						String[] aux = x.split(": .word ");//na declaracao de vetores, eh necessario que seja utilizado 'nomedovetor: .word '
+										
+						//split utilizado para separar cada valor que compoe o vetor
 						String[] aux2 = aux[1].split(",");
 						
-						EP2_OCD.MemoriaPrincipalBinario.add(aux2[0]);
+						//adiciona o primeiro item separado para conseguir a posicao dele
+						EP2_OCD.MemoriaPrincipalBinario.add(Integer.toBinaryString(Integer.parseInt(aux2[0])));
 						int posicao = EP2_OCD.MemoriaPrincipalBinario.size()-1;
-						for(int i = 0; i < aux2.length; i++){
-							EP2_OCD.MemoriaPrincipalBinario.add(aux2[i]);
+						
+						//adiciona os itens subsequentes
+						for(int i = 1; i < aux2.length; i++){
+							EP2_OCD.MemoriaPrincipalBinario.add(Integer.toBinaryString(Integer.parseInt(aux2[i])));
 						}
 							
+						//guarda o nome do vetor com a posicao do primeiro item
 						EP2_OCD.label.put(aux[0], posicao);
 						
+						//passa para a proxima linha
+						x = scan.nextLine();
+						
 					}
+					
+					
 				}
-				else if(x.contains(".text")){
+				
+				for(Object in : EP2_OCD.MemoriaPrincipalBinario) {
+					System.out.println(in);
+				}
+				
+				System.out.println("-------------");
+				System.out.println(x);
+				System.out.println("-------------");
+				
+				
+				
+				if(x.contains(".text")){
 					
 					while (scan.hasNext()){
+						x = scan.nextLine();
 						Instrucao in = new Instrucao();
+						
 
 						String[] divideOpcode = x.split(" ");
+						
+						in.opcode = divideOpcode[0];		
+						
 						String[] divideInstrucao = divideOpcode[1].split(",");
 						
-						in.opcode = divideOpcode[0];
-						if(divideInstrucao[0] != null) in.parametro1 = divideInstrucao[0];
-						if(divideInstrucao[1] != null) in.parametro2 = divideInstrucao[1];
-						if(divideInstrucao[2] != null) in.parametro3 = divideInstrucao[2];
+						if(in.opcode.equals("lw") || in.opcode.equals("sw") ) {
+							
+							in.parametro1 = divideInstrucao[0];
+							in.parametro2 = divideInstrucao[1]+" "+divideOpcode[2];
+							
+						}
+						else {
+							
+							if(divideInstrucao[0] != null) in.parametro1 = divideInstrucao[0];
+							if(divideInstrucao.length >= 2 && divideInstrucao[1] != null) in.parametro2 = divideInstrucao[1];
+							if(divideInstrucao.length == 3 && divideInstrucao[2] != null) in.parametro3 = divideInstrucao[2];
+						}
 
 						EP2_OCD.MemoriaPrincipalAssembly.add(in);
-
-						x = scan.nextLine();
+						
 					}
 				}
 				
 			}
+			
+			System.out.println("------------------------------------------------------------------");
+			
+			for(Instrucao in : EP2_OCD.MemoriaPrincipalAssembly) {
+				System.out.println(in);
+			}
+			
+			System.out.println("------------------------------------------------------------------");
+			
+			
 			
 			br.close();
 			
 		}
 		catch(Exception ex){
 			JOptionPane.showMessageDialog (null, ex);
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
 		}
 	}
 }

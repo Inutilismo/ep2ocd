@@ -14,6 +14,7 @@ public class EP2_OCD {
     
     // public static List<String> codigo = new ArrayList<>();
     
+    
     public static void main(String[] args) {
     	
     }
@@ -25,120 +26,73 @@ public class EP2_OCD {
     		switch(in.opcode) {
     			case "add": {
     				newIn.opcode = "00001";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
-    				if(in.parametro2 == "$s1") newIn.parametro2 = "000000001";
-    				if(in.parametro2 == "$s2") newIn.parametro2 = "000000010";
-    				if(in.parametro2 == "$s3") newIn.parametro2 = "000000011";
-    				if(in.parametro2 == "$s4") newIn.parametro2 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro2 = PreencheP2(in);
     				
-    				if(in.parametro3 == "$s1") newIn.parametro3 = "000000001";
-    				if(in.parametro3 == "$s2") newIn.parametro3 = "000000010";
-    				if(in.parametro3 == "$s3") newIn.parametro3 = "000000011";
-    				if(in.parametro3 == "$s4") newIn.parametro3 = "000000100";  
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro3 = PreencheP3(in);
     			}
+    			break;
     			
     			case "addi": {
     				newIn.opcode = "00010";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
-    				if(in.parametro2 == "$s1") newIn.parametro2 = "000000001";
-    				if(in.parametro2 == "$s2") newIn.parametro2 = "000000010";
-    				if(in.parametro2 == "$s3") newIn.parametro2 = "000000011";
-    				if(in.parametro2 == "$s4") newIn.parametro2 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido"); 
+    				newIn.parametro2 = PreencheP2(in);
     				
     				newIn.parametro3 = Integer.toBinaryString(Integer.parseInt(in.parametro3));
     				if(newIn.parametro3.length() > 9) throw new InputMismatchException("Numero de bits excede o limite");
-    			}
+    			}break;
     			
     			case "sub":{
     				newIn.opcode = "00011";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
-    				if(in.parametro2 == "$s1") newIn.parametro2 = "000000001";
-    				if(in.parametro2 == "$s2") newIn.parametro2 = "000000010";
-    				if(in.parametro2 == "$s3") newIn.parametro2 = "000000011";
-    				if(in.parametro2 == "$s4") newIn.parametro2 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro2 = PreencheP2(in);
     				
-    				if(in.parametro3 == "$s1") newIn.parametro3 = "000000001";
-    				if(in.parametro3 == "$s2") newIn.parametro3 = "000000010";
-    				if(in.parametro3 == "$s3") newIn.parametro3 = "000000011";
-    				if(in.parametro3 == "$s4") newIn.parametro3 = "000000100";  
-    				else throw new InputMismatchException("Parametro invalido");    				
-    			}
+    				newIn.parametro3 = PreencheP3(in);   				
+    			}break;
     			
     			case "subi": {
     				newIn.opcode = "00100";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
-    				if(in.parametro2 == "$s1") newIn.parametro2 = "000000001";
-    				if(in.parametro2 == "$s2") newIn.parametro2 = "000000010";
-    				if(in.parametro2 == "$s3") newIn.parametro2 = "000000011";
-    				if(in.parametro2 == "$s4") newIn.parametro2 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido"); 
+    				newIn.parametro2 = PreencheP2(in);
     				
     				newIn.parametro3 = Integer.toBinaryString(Integer.parseInt(in.parametro3));
     				if(newIn.parametro3.length() > 9) throw new InputMismatchException("Numero de bits excede o limite");    				
-    			}
+    			}break;
     			
     			case "li": {
     				newIn.opcode = "00101";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				System.out.println(in);
+    				newIn.parametro1 = PreencheP1(in);
     				
     				newIn.parametro2 = Integer.toBinaryString(Integer.parseInt(in.parametro2));
     				if(newIn.parametro2.length() > 9) throw new InputMismatchException("Numero de bits excede o limite");  
     			
     				newIn.parametro3 = "000000000";
-    			}
+    			}break;
     			
     			case "lw": {		//quando criarmos os vetores na mem�ria, temos que salvar o indexOf da 1� posi��o deles no ArrayList
     				newIn.opcode = "00110";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
+    				
+    				System.out.println(in.parametro2);
     				
     				String[] x = in.parametro2.split(" ");	//[16,(endere�o de mem�ria que indica o label)]
+    				System.out.println(x.length);
     				x[1] = x[1].substring(1, x[1].length()-1);
     				
     				int aux = Integer.parseInt(x[0])/4;
     				newIn.parametro2 = Integer.toBinaryString(aux + Integer.parseInt(x[1]));
     				
     				newIn.parametro3 = "000000000";
-    			}
+    			}break;
     			
     			case "sw": {
     				newIn.opcode = "00111";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
     				String[] x = in.parametro2.split(" ");	//[16,(endere�o de mem�ria que indica o label)]
     				x[1] = x[1].substring(1, x[1].length()-1);
@@ -147,48 +101,36 @@ public class EP2_OCD {
     				newIn.parametro2 = Integer.toBinaryString(aux + Integer.parseInt(x[1]));    	
     				
     				newIn.parametro3 = "000000000";
-    			}
+    			}break;
     			
     			case "move": {
     				newIn.opcode = "01000";
 
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
-    				if(in.parametro2 == "$s1") newIn.parametro2 = "000000001";
-    				if(in.parametro2 == "$s2") newIn.parametro2 = "000000010";
-    				if(in.parametro2 == "$s3") newIn.parametro2 = "000000011";
-    				if(in.parametro2 == "$s4") newIn.parametro2 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido"); 
+    				newIn.parametro2 = PreencheP2(in); 
     				
     				newIn.parametro3 = "000000000";
-    			}
+    			}break;
     			
     			case "beq": {
     				
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
     				if(in.parametro2.contains("$s")) {	//se eh um registrador
 	    				if(in.parametro2 == "$s1") {
 	    					newIn.parametro2 = "000000001";
 	    					newIn.opcode = "01010";
 	    				}
-	    				if(in.parametro2 == "$s2") {
+	    				else if(in.parametro2 == "$s2") {
 	    					newIn.parametro2 = "000000010";
 	    					newIn.opcode = "01010";
 	    				}
-	    				if(in.parametro2 == "$s3") {
+	    				else if(in.parametro2 == "$s3") {
 	    					newIn.parametro2 = "000000011";
 	    					newIn.opcode = "01010";
 	    				}
-	    				if(in.parametro2 == "$s4") {
+	    				else if(in.parametro2 == "$s4") {
 	    					newIn.parametro2 = "000000100";
 	    					newIn.opcode = "01010";
 	    				}
@@ -202,29 +144,25 @@ public class EP2_OCD {
     			
     				newIn.parametro3 = Integer.toBinaryString(Integer.parseInt(in.parametro3));
     				if(newIn.parametro3.length() > 9) throw new InputMismatchException("Numero de bits excede o limite");
-    			}
+    			}break;
     			
     			case "bne": {
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
     				if(in.parametro2.contains("$s")) {	//se eh um registrador
 	    				if(in.parametro2 == "$s1") {
 	    					newIn.parametro2 = "000000001";
 	    					newIn.opcode = "01100";
 	    				}
-	    				if(in.parametro2 == "$s2") {
+	    				else if(in.parametro2 == "$s2") {
 	    					newIn.parametro2 = "000000010";
 	    					newIn.opcode = "01100";
 	    				}
-	    				if(in.parametro2 == "$s3") {
+	    				else if(in.parametro2 == "$s3") {
 	    					newIn.parametro2 = "000000011";
 	    					newIn.opcode = "01100";
 	    				}
-	    				if(in.parametro2 == "$s4") {
+	    				else if(in.parametro2 == "$s4") {
 	    					newIn.parametro2 = "000000100";
 	    					newIn.opcode = "01100";
 	    				}
@@ -238,7 +176,7 @@ public class EP2_OCD {
     			
     				newIn.parametro3 = Integer.toBinaryString(Integer.parseInt(in.parametro3));
     				if(newIn.parametro3.length() > 9) throw new InputMismatchException("Numero de bits excede o limite");    				
-    			}
+    			}break;
     			
     			case "j":{
     				newIn.opcode = "01101";
@@ -248,44 +186,54 @@ public class EP2_OCD {
     				
     				newIn.parametro2 = "000000000";
     				newIn.parametro3 = "000000000";
-    			}
+    			}break;
     			
     			case "slt": {
     				newIn.opcode = "01110";
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
-    				if(in.parametro2 == "$s1") newIn.parametro2 = "000000001";
-    				if(in.parametro2 == "$s2") newIn.parametro2 = "000000010";
-    				if(in.parametro2 == "$s3") newIn.parametro2 = "000000011";
-    				if(in.parametro2 == "$s4") newIn.parametro2 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro2 = PreencheP2(in);
     				
-    				if(in.parametro3 == "$s1") newIn.parametro3 = "000000001";
-    				if(in.parametro3 == "$s2") newIn.parametro3 = "000000010";
-    				if(in.parametro3 == "$s3") newIn.parametro3 = "000000011";
-    				if(in.parametro3 == "$s4") newIn.parametro3 = "000000100";  
-    				else throw new InputMismatchException("Parametro invalido");    				
-    			}
+    				newIn.parametro3 = PreencheP3(in);    				
+    			}break;
     			
     			case "la": {
     				newIn.opcode = "01111";
     				
-    				if(in.parametro1 == "$s1") newIn.parametro1 = "000000001";
-    				if(in.parametro1 == "$s2") newIn.parametro1 = "000000010";
-    				if(in.parametro1 == "$s3") newIn.parametro1 = "000000011";
-    				if(in.parametro1 == "$s4") newIn.parametro1 = "000000100";
-    				else throw new InputMismatchException("Parametro invalido");
+    				newIn.parametro1 = PreencheP1(in);
     				
     				newIn.parametro2 = Integer.toBinaryString(label.get(in.parametro2));
-				}
+				}break;
 				
-				MemoriaPrincipalBinario.add(newIn);
+				
     		}
+    		
+    		MemoriaPrincipalBinario.add(newIn);
     	}
+    }
+    
+    public static String PreencheP1(Instrucao in) {
+    	if(in.parametro1.equals("$s1")) return "000000001";
+		else if(in.parametro1.equals("$s2")) return "000000010";
+		else if(in.parametro1.equals("$s3")) return "000000011";
+		else if(in.parametro1.equals("$s4")) return "000000100";
+		else throw new InputMismatchException("Parametro invalido");
+    }
+    
+    public static String PreencheP2(Instrucao in) {
+    	if(in.parametro2.equals("$s1")) return "000000001";
+		else if(in.parametro2.equals("$s2")) return "000000010";
+		else if(in.parametro2.equals("$s3")) return "000000011";
+		else if(in.parametro2.equals("$s4")) return "000000100";
+		else throw new InputMismatchException("Parametro invalido");
+    }
+    
+    public static String PreencheP3(Instrucao in) {
+    	if(in.parametro3.equals("$s1")) return "000000001";
+		else if(in.parametro3.equals("$s2")) return "000000010";
+		else if(in.parametro3.equals("$s3")) return "000000011";
+		else if(in.parametro3.equals("$s4")) return "000000100";
+		else throw new InputMismatchException("Parametro invalido");
     }
     
 }

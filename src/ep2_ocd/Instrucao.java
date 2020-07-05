@@ -5,6 +5,15 @@ class Instrucao {
     public String parametro1;
     public String parametro2;
     public String parametro3;
+    
+    
+    @Override
+	public String toString() {
+		return "Instrucao [opcode=" + opcode + ", parametro1=" + parametro1 + ", parametro2=" + parametro2
+				+ ", parametro3=" + parametro3 + "]";
+	}
+
+	
 
     public Instrucao(){}
     
