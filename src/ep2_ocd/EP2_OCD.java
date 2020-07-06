@@ -16,7 +16,7 @@ public class EP2_OCD {
     
     
     public static void main(String[] args) {
-    	
+    	UC uc = new UC();
     }
     
     public static void traduzAssembly(){
@@ -78,16 +78,20 @@ public class EP2_OCD {
     				newIn.opcode = "00110";
     				newIn.parametro1 = PreencheP1(in);
     				
-    				System.out.println(in.parametro2);
+//    				System.out.println(in.parametro2);
     				
     				String[] x = in.parametro2.split(" ");	//[16,(endere�o de mem�ria que indica o label)]
-    				System.out.println(x.length);
+//    				System.out.println(x.length);
     				x[1] = x[1].substring(1, x[1].length()-1);
     				
     				int aux = Integer.parseInt(x[0])/4;
-    				newIn.parametro2 = Integer.toBinaryString(aux + Integer.parseInt(x[1]));
+					newIn.parametro2 = Integer.toBinaryString(aux);
+
+					if(x[1].equals("$s1")) newIn.parametro3 = "000000001";
+					else if(x[1].equals("$s2")) newIn.parametro3 = "000000010";
+					else if(x[1].equals("$s3")) newIn.parametro3 = "000000011";
+					else if(x[1].equals("$s4")) newIn.parametro3 = "000000100";
     				
-    				newIn.parametro3 = "000000000";
     			}break;
     			
     			case "sw": {
@@ -98,9 +102,13 @@ public class EP2_OCD {
     				x[1] = x[1].substring(1, x[1].length()-1);
     				
     				int aux = Integer.parseInt(x[0])/4;
-    				newIn.parametro2 = Integer.toBinaryString(aux + Integer.parseInt(x[1]));    	
-    				
-    				newIn.parametro3 = "000000000";
+    				newIn.parametro2 = Integer.toBinaryString(aux);
+
+					if(x[1].equals("$s1")) newIn.parametro3 = "000000001";
+					else if(x[1].equals("$s2")) newIn.parametro3 = "000000010";
+					else if(x[1].equals("$s3")) newIn.parametro3 = "000000011";
+					else if(x[1].equals("$s4")) newIn.parametro3 = "000000100";
+
     			}break;
     			
     			case "move": {

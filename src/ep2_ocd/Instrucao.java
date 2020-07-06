@@ -7,14 +7,6 @@ class Instrucao {
     public String parametro3;
     
     
-    @Override
-	public String toString() {
-		return "Instrucao [opcode=" + opcode + ", parametro1=" + parametro1 + ", parametro2=" + parametro2
-				+ ", parametro3=" + parametro3 + "]";
-	}
-
-	
-
     public Instrucao(){}
     
     public Instrucao(String opcode, String parametro1, String parametro2, String parametro3) {
@@ -24,4 +16,10 @@ class Instrucao {
         this.parametro3 = parametro3;
     }
     
+    @Override
+	public String toString() {
+		return "Instrucao [opcode=" + opcode + ", parametro1=" + parametro1 + ", parametro2=" + parametro2
+				+ ", parametro3=" + parametro3 + "]";
+	}
+
 }

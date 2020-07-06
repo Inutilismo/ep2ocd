@@ -63,6 +63,7 @@ public class Main {
 		JScrollPane scrollPane = new JScrollPane(textAreaPreview);
 		scrollPane.setBounds(29, 93, 404, 168);
 		frame.getContentPane().add(scrollPane);
+		textAreaPreview.setEditable(false);//------------------------------------
 				
 		
 		JButton btnArquivo = new JButton("Arquivo");
@@ -180,11 +181,11 @@ public class Main {
 				for(Object in : EP2_OCD.MemoriaPrincipalBinario) {
 					System.out.println(in);
 				}
-				
+/*				
 				System.out.println("-------------");
 				System.out.println(x);
 				System.out.println("-------------");
-				
+*/				
 				
 				
 				if(x.contains(".text")){
@@ -220,14 +221,14 @@ public class Main {
 				
 			}
 			
-			System.out.println("------------------------------------------------------------------");
+/*			System.out.println("------------------------------------------------------------------");
 			
 			for(Instrucao in : EP2_OCD.MemoriaPrincipalAssembly) {
 				System.out.println(in);
 			}
 			
 			System.out.println("------------------------------------------------------------------");
-			
+*/			
 			
 			
 			br.close();
