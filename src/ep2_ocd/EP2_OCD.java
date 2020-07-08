@@ -72,7 +72,7 @@ public class EP2_OCD {
     				newIn.parametro3 = "000000000";
     			}break;
     			
-    			case "lw": {		//quando criarmos os vetores na mem�ria, temos que salvar o indexOf da 1� posi��o deles no ArrayList
+    			case "lw": {		
     				newIn.opcode = "00110";
     				newIn.parametro1 = PreencheP1(in);
     				
@@ -212,13 +212,13 @@ public class EP2_OCD {
 				}break;
 				
 				
-    		}
-			UC uc = new UC();
+			}
 			
 			MemoriaPrincipal.MemoriaPrincipalBinario.add(newIn);
 			if(auxPC == 0) CPU.PC = Integer.toString(MemoriaPrincipal.MemoriaPrincipalBinario.size()-1);
 			auxPC++;
-    	}
+		}
+		UC uc = new UC();
     }
     
     public static String PreencheP1(Instrucao in) {

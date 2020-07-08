@@ -39,6 +39,7 @@ public class MemoriaPrincipal {
 
     public static void address(){
         //retornoMemoria = MemoriaPrincipalBinario.
+        //retornar index of do objeto recebido
 
     }
 

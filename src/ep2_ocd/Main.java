@@ -106,7 +106,7 @@ public class Main {
 				ProcessamentoTxt(fileName);
 				EP2_OCD.traduzAssembly();
 				System.out.println("-------------------------------------");
-				for(Object o : EP2_OCD.MemoriaPrincipalBinario) {
+				for(Object o : MemoriaPrincipal.MemoriaPrincipalBinario) {
 					System.out.println(o);
 				}
 
@@ -160,12 +160,12 @@ public class Main {
 						String[] aux2 = aux[1].split(",");
 						
 						//adiciona o primeiro item separado para conseguir a posicao dele
-						EP2_OCD.MemoriaPrincipalBinario.add(Integer.toBinaryString(Integer.parseInt(aux2[0])));
-						int posicao = EP2_OCD.MemoriaPrincipalBinario.size()-1;
+						MemoriaPrincipal.MemoriaPrincipalBinario.add(Integer.toBinaryString(Integer.parseInt(aux2[0])));
+						int posicao = MemoriaPrincipal.MemoriaPrincipalBinario.size()-1;
 						
 						//adiciona os itens subsequentes
 						for(int i = 1; i < aux2.length; i++){
-							EP2_OCD.MemoriaPrincipalBinario.add(Integer.toBinaryString(Integer.parseInt(aux2[i])));
+							MemoriaPrincipal.MemoriaPrincipalBinario.add(Integer.toBinaryString(Integer.parseInt(aux2[i])));
 						}
 							
 						//guarda o nome do vetor com a posicao do primeiro item
@@ -179,7 +179,7 @@ public class Main {
 					
 				}
 				
-				for(Object in : EP2_OCD.MemoriaPrincipalBinario) {
+				for(Object in : MemoriaPrincipal.MemoriaPrincipalBinario) {
 					System.out.println(in);
 				}
 /*				
