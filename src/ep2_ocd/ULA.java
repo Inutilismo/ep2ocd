@@ -2,50 +2,99 @@ package ep2_ocd;
 
 class ULA {
 	String X;
+	String valor;
 	String AC;
-	
-	private void incremento (String reg) {
-		AC = Integer.toBinaryString(Integer.parseInt(reg, 2) + 1);
+
+	public void executaSinalDeControle(String codigoOperacao){
+		switch (codigoOperacao) {
+			case "0000":
+				//nao faz nada
+				break;
+
+			case "0001":
+				incremento();
+				break;
+
+			case "0010":
+				add();
+				break;
+
+			case "0011":
+				addi();
+				break;
+
+			case "0100":
+				sub();
+				break;
+
+			case "0101":
+				subi();
+				break;
+
+			case "0110":
+				BEQrr();
+				break;
+
+			case "0111":
+				BEQrc();
+				break;
+
+			case "1000":
+				BNErr();
+				break;
+
+			case "1001":
+				BNErc();
+				break;
+
+			case "1010":
+				SLT();
+				break;		
+		}
+	}
+
+	private void incremento () {
+		AC = Integer.toBinaryString(Integer.parseInt(valor, 2) + 1);
 	}
 	
-	private void add (String reg2) {
-		AC = Integer.toBinaryString(Integer.parseInt(X, 2) + Integer.parseInt(reg2, 2));
+	private void add () {
+		AC = Integer.toBinaryString(Integer.parseInt(X, 2) + Integer.parseInt(valor, 2));
 	}
 	
-	private void addi (String constante) {
-		AC = Integer.toBinaryString(Integer.parseInt(X, 2) + Integer.parseInt(constante, 2));
+	private void addi () {
+		AC = Integer.toBinaryString(Integer.parseInt(X, 2) + Integer.parseInt(valor, 2));
 	}	
 	
-	private void sub (String reg2) {
-		AC = Integer.toBinaryString(Integer.parseInt(X, 2) - Integer.parseInt(reg2, 2));
+	private void sub () {
+		AC = Integer.toBinaryString(Integer.parseInt(X, 2) - Integer.parseInt(valor, 2));
 	}	
 	
-	private void subi (String constante) {
-		AC = Integer.toBinaryString(Integer.parseInt(X, 2) - Integer.parseInt(constante, 2));
+	private void subi () {
+		AC = Integer.toBinaryString(Integer.parseInt(X, 2) - Integer.parseInt(valor, 2));
 	}	
 	
-	private void BEQrr (String reg2) {
-		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(reg2, 2)) == 0) AC = "1";
+	private void BEQrr () {
+		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) == 0) AC = "1";
 		else AC = "0";
 	}	
 	
-	private void BEQrc (String constante) {
-		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(constante, 2)) == 0) AC = "1";
+	private void BEQrc () {
+		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) == 0) AC = "1";
 		else AC = "0";
 	}		
 	
-	private void BNErr (String reg2) {
-		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(reg2, 2)) != 0) AC = "1";
+	private void BNErr () {
+		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) != 0) AC = "1";
 		else AC = "0";
 	}	
 	
-	private void BNErc (String constante) {
-		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(constante, 2)) != 0) AC = "1";
+	private void BNErc () {
+		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) != 0) AC = "1";
 		else AC = "0";
 	}	
 	
-	private void SLT (String reg2) {
-		if (Integer.parseInt(X, 2) - Integer.parseInt(reg2, 2) < 0) AC = "1";
+	private void SLT () {
+		if (Integer.parseInt(X, 2) - Integer.parseInt(valor, 2) < 0) AC = "1";
 		else AC = "0";
 	}		
 	

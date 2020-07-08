@@ -8,20 +8,18 @@ import java.util.Map;
 
 public class EP2_OCD {
 
-    public static List<Instrucao> MemoriaPrincipalAssembly = new ArrayList<>();
-    public static List<Object> MemoriaPrincipalBinario = new ArrayList<>();
+    public static List<Instrucao> MemoriaAuxiliar = new ArrayList<>();
     public static Map<String,Integer> label = new HashMap<>();	//chave � o nome do label e o valor eh a posicao da memoria para a qual ele aponta
-    
-    // public static List<String> codigo = new ArrayList<>();
-    
     
     public static void main(String[] args) {
     	UC uc = new UC();
     }
     
     public static void traduzAssembly(){
-    	
-    	for(Instrucao in : MemoriaPrincipalAssembly) {
+		//variavel pra indicar qual linha contem a primeira instrucao de assembly a ser executada
+		int auxPC = 0;
+		
+    	for(Instrucao in : MemoriaAuxiliar) {
     		Instrucao newIn = new Instrucao();
     		switch(in.opcode) {
     			case "add": {
@@ -215,8 +213,11 @@ public class EP2_OCD {
 				
 				
     		}
-    		
-    		MemoriaPrincipalBinario.add(newIn);
+			UC uc = new UC();
+			
+			MemoriaPrincipal.MemoriaPrincipalBinario.add(newIn);
+			if(auxPC == 0) CPU.PC = Integer.toString(MemoriaPrincipal.MemoriaPrincipalBinario.size()-1);
+			auxPC++;
     	}
     }
     

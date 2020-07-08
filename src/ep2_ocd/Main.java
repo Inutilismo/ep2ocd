@@ -116,6 +116,8 @@ public class Main {
 				
 				Janela2 janela = new Janela2();
 				janela.initialize();//roda a janela 2
+
+				
 				
 
 				/*
@@ -124,7 +126,6 @@ public class Main {
 				 * 
 				 * 
 				 */
-
 				 
 			}
 		});
@@ -214,7 +215,7 @@ public class Main {
 							if(divideInstrucao.length == 3 && divideInstrucao[2] != null) in.parametro3 = divideInstrucao[2];
 						}
 
-						EP2_OCD.MemoriaPrincipalAssembly.add(in);
+						EP2_OCD.MemoriaAuxiliar.add(in);
 						
 					}
 				}

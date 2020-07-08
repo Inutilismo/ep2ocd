@@ -1,12 +1,14 @@
 package ep2_ocd;
 
 public class CPU {
-    private int PC = 0;
-    private int MAR;
-    private int MBR;
-    private int s1,s2,s3,s4;
+    public static String PC; //converter para int sempre que for usar
+    public static String MAR; //converter para int sempre que for usar
+    public static String MBR;
+    public static String s1,s2,s3,s4;
+    public static String barramentoInterno;
+    public static String barramentoMemoria;
     
-    private IR IR;
-    private ULA ULA;
-    private UC UC;
+    public static IR IR;
+    public static ULA ULA;
+    public static UC UC;
 }
