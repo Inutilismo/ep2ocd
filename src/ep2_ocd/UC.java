@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Iterator;
 
 class UC {
     private List<String> memoriaDeControle = new ArrayList<>();
@@ -80,12 +81,16 @@ class UC {
 
         IR.separaInstrucao();
         
-        for (Object obj : MemoriaPrincipal.MemoriaPrincipalBinario){
-            if(obj instanceof Instrucao){
+        //este for eh utilizado APENAS para referencia da quantidade de instrucoes existentes na memoria
+        //os parametros sao todos recebidos do IR
+        Iterator<Object> iterator = MemoriaPrincipal.MemoriaPrincipalBinario.iterator();
+        //for (Object obj : MemoriaPrincipal.MemoriaPrincipalBinario){
+        if(iterator.hasNext()){
+            if(iterator instanceof Instrucao){
                 //executa o ciclo de instrucao
-                Instrucao in  = (Instrucao) obj;
+                //Instrucao in  = (Instrucao) obj;
                 String codigoRegistrador;
-                switch (in.opcode) {
+                switch (IR.opcode) {
                     case "00001":
                         CAR = demuxCAR.get("ADD");
                         CBR = memoriaDeControle.get(CAR);
@@ -640,7 +645,7 @@ class UC {
                     case 26:{
                         if(CBR.charAt(23) == '1'){  //Sabemos que ta passando enderecos
                             System.out.println("BaRRaMenTo externo: " + barramento);
-                            MemoriaPrincipal.enderecoMar = barramento;
+                            MemoriaPrincipal.enderecoMar = Integer.toString(Integer.parseInt(barramento, 2));
                         }
                         else if(CBR.charAt(24) == '1'){ //Sabemos que esta passando dados
                             MemoriaPrincipal.valorMBR = barramento;
