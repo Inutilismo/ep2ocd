@@ -7,9 +7,18 @@ public class IR {
     public static String P3;
 
     public IR(String opcode, String parametro1, String parametro2, String parametro3) {
-        this.opcode = opcode;
-        this.P1 = parametro1;
-        this.P2 = parametro2;
-        this.P3 = parametro3;
+        IR.opcode = opcode;
+        IR.P1 = parametro1;
+        IR.P2 = parametro2;
+        IR.P3 = parametro3;
+    }
+
+    //metodo que separa a String recebida do barramento no ciclo de busca
+    public static void separaInstrucao(){
+        String[] auxSplit = opcode.split(" ");
+        IR.opcode = auxSplit[0];
+        IR.P1 = auxSplit[1];
+        IR.P2 = auxSplit[2];
+        IR.P3 = auxSplit[3];
     }
 }

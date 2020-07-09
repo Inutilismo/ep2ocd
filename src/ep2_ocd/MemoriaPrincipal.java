@@ -8,9 +8,9 @@ public class MemoriaPrincipal {
     public static List<Object> MemoriaPrincipalBinario = new ArrayList<>();
     public static Object valorMBR;
     public static String enderecoMar;
-    public static Object retornoMemoria;
+    public static String retornoMemoria;
 
-    public static void executaSinaldeControle(String sinalDeControle){
+    public static void execSinaldeControle(String sinalDeControle){
 
         switch (sinalDeControle) { 
             case "001":
@@ -26,11 +26,17 @@ public class MemoriaPrincipal {
                 break;
         
         }
-
     }
 
     public static void read(){
-        retornoMemoria = MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar));
+        System.out.println("mar que a memoria recebeu: " + enderecoMar);
+        if(MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar)) instanceof Instrucao){
+            Instrucao aux = (Instrucao) MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar));
+            retornoMemoria = aux.opcode + " " + aux.parametro1 + " " + aux.parametro2 + " " + aux.parametro3;
+        }
+        else {
+            retornoMemoria = (String) MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar));
+        }
     }
 
     public static void write(){
@@ -38,9 +44,7 @@ public class MemoriaPrincipal {
     }
 
     public static void address(){
-        //retornoMemoria = MemoriaPrincipalBinario.
-        //retornar index of do objeto recebido
-
+        retornoMemoria = enderecoMar;
     }
 
 

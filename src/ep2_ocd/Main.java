@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 
 public class Main {
 	
-	String fileName = "";
+	static String fileName = "";
 
 	private JFrame frame;
 
@@ -105,6 +105,9 @@ public class Main {
 
 				ProcessamentoTxt(fileName);
 				EP2_OCD.traduzAssembly();
+
+				CPU.inicio();
+
 				System.out.println("-------------------------------------");
 				for(Object o : MemoriaPrincipal.MemoriaPrincipalBinario) {
 					System.out.println(o);

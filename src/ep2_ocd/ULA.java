@@ -1,11 +1,12 @@
 package ep2_ocd;
 
 class ULA {
-	String X;
-	String valor;
-	String AC;
+	static String X = "";
+	static String valor = "";
+	static String AC = "";
 
-	public void executaSinalDeControle(String codigoOperacao){
+	public static void executaSinalDeControle(String codigoOperacao){
+		System.out.println(codigoOperacao);
 		switch (codigoOperacao) {
 			case "0000":
 				//nao faz nada
@@ -53,47 +54,49 @@ class ULA {
 		}
 	}
 
-	private void incremento () {
+	private static void incremento () {
+		System.out.println("valor em binario: "+ valor);
+		System.out.println("valor em decimal: "+Integer.parseInt(valor, 2));
 		AC = Integer.toBinaryString(Integer.parseInt(valor, 2) + 1);
 	}
 	
-	private void add () {
+	private static void add () {
 		AC = Integer.toBinaryString(Integer.parseInt(X, 2) + Integer.parseInt(valor, 2));
 	}
 	
-	private void addi () {
+	private static void addi () {
 		AC = Integer.toBinaryString(Integer.parseInt(X, 2) + Integer.parseInt(valor, 2));
 	}	
 	
-	private void sub () {
+	private static void sub () {
 		AC = Integer.toBinaryString(Integer.parseInt(X, 2) - Integer.parseInt(valor, 2));
 	}	
 	
-	private void subi () {
+	private static void subi () {
 		AC = Integer.toBinaryString(Integer.parseInt(X, 2) - Integer.parseInt(valor, 2));
 	}	
 	
-	private void BEQrr () {
+	private static void BEQrr () {
 		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) == 0) AC = "1";
 		else AC = "0";
 	}	
 	
-	private void BEQrc () {
+	private static void BEQrc () {
 		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) == 0) AC = "1";
 		else AC = "0";
 	}		
 	
-	private void BNErr () {
+	private static void BNErr () {
 		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) != 0) AC = "1";
 		else AC = "0";
 	}	
 	
-	private void BNErc () {
+	private static void BNErc () {
 		if (Math.abs(Integer.parseInt(X, 2)) - Math.abs(Integer.parseInt(valor, 2)) != 0) AC = "1";
 		else AC = "0";
 	}	
 	
-	private void SLT () {
+	private static void SLT () {
 		if (Integer.parseInt(X, 2) - Integer.parseInt(valor, 2) < 0) AC = "1";
 		else AC = "0";
 	}		

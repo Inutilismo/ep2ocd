@@ -12,7 +12,7 @@ public class EP2_OCD {
     public static Map<String,Integer> label = new HashMap<>();	//chave � o nome do label e o valor eh a posicao da memoria para a qual ele aponta
     
     public static void main(String[] args) {
-    	UC uc = new UC();
+    	
     }
     
     public static void traduzAssembly(){
@@ -218,7 +218,6 @@ public class EP2_OCD {
 			if(auxPC == 0) CPU.PC = Integer.toString(MemoriaPrincipal.MemoriaPrincipalBinario.size()-1);
 			auxPC++;
 		}
-		UC uc = new UC();
     }
     
     public static String PreencheP1(Instrucao in) {

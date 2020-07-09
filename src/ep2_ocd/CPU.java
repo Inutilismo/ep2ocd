@@ -8,7 +8,17 @@ public class CPU {
     public static String barramentoInterno;
     public static String barramentoMemoria;
     
-    public static IR IR;
+    public IR IR;
     public static ULA ULA;
     public static UC UC;
+
+    public static void inicio() {
+        UC = new UC();
+    }
+
+    /*public CPU(){
+        UC = new UC();
+    }*/
+
+    
 }

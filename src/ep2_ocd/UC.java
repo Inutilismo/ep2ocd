@@ -10,8 +10,8 @@ class UC {
     private int CAR;
     private String CBR;
     private Map<String,Integer> demuxCAR = new HashMap<>();
-    Map<Integer,String> portasEntrada = new HashMap<>();
-    Map<Integer,String> portasSaida = new HashMap<>();
+    //ap<Integer,String> portasEntrada = new HashMap<>();
+    //Map<Integer,String> portasSaida = new HashMap<>();
     
     public UC (){
         preencheMemoriaDeControle();
@@ -43,17 +43,18 @@ class UC {
                 CBR = CBR.substring(0, 11) + "1" + CBR.substring(13, CBR.length()-1); 
         }
         
+        //aqui lidamos com a parte de jump da palavra de controle
         if(CBR.charAt(38) == '1'){
 
-            if(CPU.IR.opcode.equals("01101")){  //se for um jump
+            if(IR.opcode.equals("01101")){  //se for um jump
 
-                CBR = CBR.substring(0, 39)+CPU.IR.P1;
+                CBR = CBR.substring(0, 39)+IR.P1;
 
             }
 
             else{   //se for um BEQ ou um BNE
                 
-                CBR = CBR.substring(0, 39)+CPU.ULA.AC;
+                CBR = CBR.substring(0, 39)+ ULA.AC;
                 
             }
 
@@ -67,6 +68,17 @@ class UC {
         CAR = 0;
         CBR = memoriaDeControle.get(CAR);
         executaLinhaCBR();
+        CAR++;
+        CBR = memoriaDeControle.get(CAR);
+        executaLinhaCBR();
+        CAR++;
+        CBR = memoriaDeControle.get(CAR);
+        executaLinhaCBR();
+        CAR++;
+        CBR = memoriaDeControle.get(CAR);
+        executaLinhaCBR();
+
+        IR.separaInstrucao();
         
         for (Object obj : MemoriaPrincipal.MemoriaPrincipalBinario){
             if(obj instanceof Instrucao){
@@ -78,7 +90,7 @@ class UC {
                         CAR = demuxCAR.get("ADD");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P2)
                         administraCBR(codigoRegistrador,"o");
                         
@@ -88,7 +100,7 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
 
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P3)
-                        codigoRegistrador = CPU.IR.P3;
+                        codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador,"o");
 
                         // executa a segunda linha do microprograma
@@ -96,7 +108,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);                        
                         // abre a portinha de entrada registrador cujo codigo esta no IR(P1)
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         break;
@@ -105,7 +117,7 @@ class UC {
                         //3
                         CAR = demuxCAR.get("ADDI");
                         CBR = memoriaDeControle.get(CAR);
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P2)
                         administraCBR(codigoRegistrador,"o");
                         
@@ -120,7 +132,7 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
                         
                         // abre a portinha de entrada registrador cujo codigo esta no IR(P1)
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         break;
@@ -130,7 +142,7 @@ class UC {
                         CAR = demuxCAR.get("SUB");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P2)
                         administraCBR(codigoRegistrador,"o");
                         
@@ -140,7 +152,7 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
 
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P3)
-                        codigoRegistrador = CPU.IR.P3;
+                        codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador,"o");
 
                         // executa a segunda linha do microprograma
@@ -149,7 +161,7 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
                         
                         // abre a portinha de entrada registrador cujo codigo esta no IR(P1)
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                             
@@ -160,7 +172,7 @@ class UC {
                         CAR = demuxCAR.get("SUBI");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P2)
                         administraCBR(codigoRegistrador,"o");
                         
@@ -175,7 +187,7 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
                         
                         // abre a portinha de entrada registrador cujo codigo esta no IR(P1)
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                             
@@ -186,7 +198,7 @@ class UC {
                         CAR = demuxCAR.get("LI");
                         CBR = memoriaDeControle.get(CAR);
                             
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         
@@ -197,7 +209,7 @@ class UC {
                         CAR = demuxCAR.get("LW");
                         CBR = memoriaDeControle.get(CAR);
                             
-                        codigoRegistrador = CPU.IR.P3;
+                        codigoRegistrador = IR.P3;
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P2)
                         administraCBR(codigoRegistrador,"o");
                         executaLinhaCBR();
@@ -220,7 +232,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                           
@@ -231,7 +243,7 @@ class UC {
                         CAR = demuxCAR.get("SW");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P3;
+                        codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
@@ -245,7 +257,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
@@ -260,9 +272,9 @@ class UC {
                         CAR = demuxCAR.get("MOVE");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                             
@@ -273,19 +285,19 @@ class UC {
                         CAR = demuxCAR.get("BEQrr");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        if(CPU.ULA.AC.equals("1")) {
+                        if(ULA.AC.equals("1")) {
                             
                             administraCBR(null, null);
                             executaLinhaCBR();
@@ -299,7 +311,7 @@ class UC {
                         CAR = demuxCAR.get("BEQrc");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
@@ -309,7 +321,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        if(CPU.ULA.AC.equals("1")) {
+                        if(ULA.AC.equals("1")) {
                             administraCBR(null, null);
                             executaLinhaCBR();
                             
@@ -323,19 +335,19 @@ class UC {
                         CAR = demuxCAR.get("BNQrr");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        if(CPU.ULA.AC.equals("1")) {
+                        if(ULA.AC.equals("1")) {
                             administraCBR(null, null);
                             executaLinhaCBR();
                             
@@ -348,7 +360,7 @@ class UC {
                         CAR = demuxCAR.get("BNQrc");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
@@ -358,7 +370,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        if(CPU.ULA.AC.equals("1")) {
+                        if(ULA.AC.equals("1")) {
                             administraCBR(null, null);
                             executaLinhaCBR();                           
                         }
@@ -379,19 +391,19 @@ class UC {
                         CAR = demuxCAR.get("SLT");
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P2;
+                        codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P3;
+                        codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         CAR++;
@@ -415,7 +427,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
 
-                        codigoRegistrador = CPU.IR.P1;
+                        codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                             
@@ -427,45 +439,132 @@ class UC {
                 }
            }
             
-           //ciclo de busca
-           CAR = 0;
-           CBR = memoriaDeControle.get(CAR);
-           executaLinhaCBR();
+            //ciclo de busca
+            CAR = 0;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+            CAR++;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+            CAR++;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+            CAR++;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+
+           IR.separaInstrucao();
         }
     }
 
     private void executaLinhaCBR(){
-        //PROBLEMAS COM A MEMORIA - NAO CONSEGUIMOS DIFERENCIAR
-        //QUANDO A MEMORIA RECEBE DADOS DO MAR OU DO MBR
+
+        System.out.println("CBR: " + CBR);
+        System.out.println("PC: " + CPU.PC);
+        System.out.println("MAR: " + CPU.MAR);
+        System.out.println("Memoria: " + MemoriaPrincipal.enderecoMar);
+        System.out.println("barramento interno: " + CPU.barramentoInterno);
+        System.out.println("barramento externo: " + CPU.barramentoMemoria);
 
         //barramento interno recebendo os dados dos registradores
-        for(int i = 0; i < 24; i++){
-            if(CBR.charAt(i) == '1' && portasSaida.containsKey(i)) CPU.barramentoInterno = portasSaida.get(i);           
-        }
+        CPU.barramentoInterno = administraPortasDeSaidaInterna(CPU.barramentoInterno, CBR);
 
         //barramento externo recebendo os dados dos registradores 
-        for(int i = 24; i < 28; i++){
-            if(CBR.charAt(i) == '1' && portasSaida.containsKey(i)) CPU.barramentoMemoria = portasSaida.get(i);      
-        }
+        CPU.barramentoMemoria = administraPortasDeSaidaExterna(CPU.barramentoMemoria, CBR);
 
         //registradores recebendo os dados do barramento interno
-        administraPortasDeEntrada(CPU.barramentoInterno, CBR);
+        administraPortasDeEntradaInterna(CPU.barramentoInterno, CBR);
 
         //registradores recebendo os dados do barramento externo
-        administraPortasDeEntrada(CPU.barramentoMemoria, CBR);
+        administraPortasDeEntradaExterna(CPU.barramentoMemoria, CBR);
         
         //sinais de controle ula
         String[] recebeCodigo = CBR.split(" ");
-        CPU.ULA.executaSinalDeControle(recebeCodigo[1]);
+        ULA.executaSinalDeControle(recebeCodigo[1]);
 
         //sinais de controle memoria
-        MemoriaPrincipal.executaSinaldeControle(recebeCodigo[2]);  
-        
+        MemoriaPrincipal.execSinaldeControle(recebeCodigo[2]);  
+ 
     }
 
-    private void administraPortasDeEntrada(String barramento, String CBR){
+    private String administraPortasDeSaidaInterna(String barramento, String CBR){
+        //System.out.println("barramento: " + barramento);
+        for(int i = 0; i < 23; i++){
+            if(CBR.charAt(i) == '1'){
+                switch(i){
+                    case 1:{
+                        barramento = CPU.PC;
+                    }break;
 
-        for(int i = 0; i < 28; i++){
+                    case 4:{
+                        barramento = CPU.MBR;
+                    }break;
+
+                    case 6:{
+                        barramento = CPU.s1;
+                    }break;
+
+                    case 8:{
+                        barramento = CPU.s2;
+                    }break;
+
+                    case 10:{
+                        barramento = CPU.s3;
+                    }break;
+
+                    case 12:{
+                        barramento = CPU.s4;
+                    }break;
+
+                    case 15:{
+                        barramento = IR.P1;
+                    }break;
+
+                    case 17:{
+                        barramento = IR.P2;
+                    }break;
+
+                    case 19:{
+                        barramento = IR.P3;
+                    }break;
+
+                    case 22:{
+                        barramento = ULA.AC;
+                    }break;
+
+                }
+            }
+        }
+        return barramento;
+    }
+
+    private String administraPortasDeSaidaExterna(String barramento, String CBR){
+        //System.out.println("barramento: " + barramento);
+        for(int i = 23; i < 28; i++){
+            if(CBR.charAt(i) == '1'){
+                switch(i){
+
+                    case 23:{
+                        barramento = CPU.MAR;
+                    }break;
+
+                    case 24:{
+                        barramento = CPU.MBR;
+                    }break;
+
+                    case 27:{
+                        barramento = MemoriaPrincipal.retornoMemoria;
+                    }break;
+
+                }
+            }
+        }
+        return barramento;
+    }
+
+    private void administraPortasDeEntradaInterna(String barramento, String CBR){
+        //System.out.println("barramento: " + barramento);
+        for(int i = 0; i < 23; i++){
             if(CBR.charAt(i) == '1'){
                 switch(i){
                     case 0:{
@@ -473,7 +572,9 @@ class UC {
                     }break;
 
                     case 2:{
+                        System.out.println("------"+barramento); 
                         CPU.MAR = barramento;
+                        System.out.println("------ MARZAO "+CPU.MAR);
                     }break;
 
                     case 3:{
@@ -497,28 +598,40 @@ class UC {
                     }break;
 
                     case 13:{
-                        CPU.IR.opcode = barramento;
+                        IR.opcode = barramento;
                     }break;
 
                     case 14:{
-                        CPU.IR.P1 = barramento;
+                        IR.P1 = barramento;
                     }break;
 
                     case 16:{
-                        CPU.IR.P2 = barramento;
+                        IR.P2 = barramento;
                     }break;
 
                     case 18:{
-                        CPU.IR.P3 = barramento;
+                        IR.P3 = barramento;
                     }break;
 
                     case 20:{
-                        CPU.ULA.X = barramento;
+                        ULA.X = barramento;
                     }break;
 
                     case 21:{
-                        CPU.ULA.valor = barramento;
+                        ULA.valor = barramento;
                     }break;
+
+                }
+            }
+        }
+
+    }
+
+    private void administraPortasDeEntradaExterna(String barramento, String CBR){
+        //System.out.println("barramento: " + barramento);
+        for(int i = 23; i < 28; i++){
+            if(CBR.charAt(i) == '1'){
+                switch(i){
 
                     case 25:{
                         CPU.MBR = barramento;
@@ -526,6 +639,7 @@ class UC {
 
                     case 26:{
                         if(CBR.charAt(23) == '1'){  //Sabemos que ta passando enderecos
+                            System.out.println("BaRRaMenTo externo: " + barramento);
                             MemoriaPrincipal.enderecoMar = barramento;
                         }
                         else if(CBR.charAt(24) == '1'){ //Sabemos que esta passando dados
@@ -541,7 +655,7 @@ class UC {
     }
 
     private void relacionaPortas(){
-        
+       /* 
         portasEntrada.put(1, "PC");
         portasEntrada.put(3, "MAR");
         portasEntrada.put(4, "MBR");
@@ -557,22 +671,21 @@ class UC {
         portasEntrada.put(22, "ULA");
         portasEntrada.put(26, "MBR");
         portasEntrada.put(27, "MemoriaPrincipal");
-
         
-        portasSaida.put(2, CPU.PC);
-        portasSaida.put(5, CPU.MBR);
-        portasSaida.put(7, CPU.s1);
-        portasSaida.put(9, CPU.s2);
-        portasSaida.put(11, CPU.s3);
-        portasSaida.put(13, CPU.s4);
-        portasSaida.put(16, CPU.IR.P1);
-        portasSaida.put(18, CPU.IR.P2);
-        portasSaida.put(20, CPU.IR.P3);
-        portasSaida.put(23, CPU.ULA.AC);
-        portasSaida.put(24, CPU.MAR);
-        portasSaida.put(25, CPU.MBR);
-        portasSaida.put(28, MemoriaPrincipal.retornoMemoria);       
-
+        portasSaida.put(2, "PC");
+        portasSaida.put(5, "MBR");
+        portasSaida.put(7, "s1");
+        portasSaida.put(9, "s2");
+        portasSaida.put(11, "s3");
+        portasSaida.put(13, "s4");
+        portasSaida.put(16, "P1");
+        portasSaida.put(18, "P2");
+        portasSaida.put(20, "P3");
+        portasSaida.put(23, "AC");
+        portasSaida.put(24, "MAR");
+        portasSaida.put(25, "MBR");
+        portasSaida.put(28, "MemoriaPrincipal");       
+*/
     }
 
     private void preencheMemoriaDeControle(){
