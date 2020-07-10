@@ -224,10 +224,10 @@ public class Main {
 				}
 				
 			}
+/*			
+			System.out.println("MEMORIA AUXILIAR ------------------------------------------------------------------");
 			
-/*			System.out.println("------------------------------------------------------------------");
-			
-			for(Instrucao in : EP2_OCD.MemoriaPrincipalAssembly) {
+			for(Instrucao in : EP2_OCD.MemoriaAuxiliar) {
 				System.out.println(in);
 			}
 			

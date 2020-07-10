@@ -215,7 +215,7 @@ public class EP2_OCD {
 			}
 			
 			MemoriaPrincipal.MemoriaPrincipalBinario.add(newIn);
-			if(auxPC == 0) CPU.PC = Integer.toString(MemoriaPrincipal.MemoriaPrincipalBinario.size()-1);
+			if(auxPC == 0) CPU.PC =Integer.toBinaryString(MemoriaPrincipal.MemoriaPrincipalBinario.size()-1);
 			auxPC++;
 		}
     }

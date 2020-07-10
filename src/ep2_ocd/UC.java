@@ -24,24 +24,24 @@ class UC {
         
         if(io.equals("i")){ //se for "i" é pra abrir a portinha de entrada do registrador
             if(codigoRegistrador.equals("000000001")) //s1
-                CBR = CBR.substring(0, 4) + "1" + CBR.substring(6, CBR.length()-1);
+                CBR = CBR.substring(0, 5) + "1" + CBR.substring(6, CBR.length());
             else if(codigoRegistrador.equals("000000010")) //s2
-                CBR = CBR.substring(0, 6) + "1" + CBR.substring(8, CBR.length()-1);
+                CBR = CBR.substring(0, 7) + "1" + CBR.substring(8, CBR.length());
             else if(codigoRegistrador.equals("000000011")) //s3
-                CBR = CBR.substring(0, 8) + "1" + CBR.substring(10, CBR.length()-1);
+                CBR = CBR.substring(0, 9) + "1" + CBR.substring(10, CBR.length());
             else if(codigoRegistrador.equals("000000100")) //s4
-                CBR = CBR.substring(0, 10) + "1" + CBR.substring(12, CBR.length()-1);    
+                CBR = CBR.substring(0, 11) + "1" + CBR.substring(12, CBR.length());    
 
         }
         else {  //senao eh pra abrir a de saida
             if(codigoRegistrador.equals("000000001")) //s1
-                CBR = CBR.substring(0, 5) + "1" + CBR.substring(7, CBR.length()-1);
+                CBR = CBR.substring(0, 6) + "1" + CBR.substring(7, CBR.length());
             else if(codigoRegistrador.equals("000000010")) //s2
-                CBR = CBR.substring(0, 7) + "1" + CBR.substring(9, CBR.length()-1);
+                CBR = CBR.substring(0, 8) + "1" + CBR.substring(9, CBR.length());
             else if(codigoRegistrador.equals("000000011")) //s3
-                CBR = CBR.substring(0, 9) + "1" + CBR.substring(11, CBR.length()-1);
+                CBR = CBR.substring(0, 10) + "1" + CBR.substring(11, CBR.length());
             else if(codigoRegistrador.equals("000000100")) //s4
-                CBR = CBR.substring(0, 11) + "1" + CBR.substring(13, CBR.length()-1); 
+                CBR = CBR.substring(0, 12) + "1" + CBR.substring(13, CBR.length()); 
         }
         
         //aqui lidamos com a parte de jump da palavra de controle
@@ -49,52 +49,55 @@ class UC {
 
             if(IR.opcode.equals("01101")){  //se for um jump
 
-                CBR = CBR.substring(0, 39)+IR.P1;
+                CBR = CBR.substring(0, 40)+IR.P1;
 
             }
 
             else{   //se for um BEQ ou um BNE
                 
-                CBR = CBR.substring(0, 39)+ ULA.AC;
+                CBR = CBR.substring(0, 40)+ ULA.AC;
                 
             }
-
-            
 
         }
     }
 
     //metodo que controla a execucao das micro-operacoes
     private void execucao(){
-        CAR = 0;
-        CBR = memoriaDeControle.get(CAR);
-        executaLinhaCBR();
-        CAR++;
-        CBR = memoriaDeControle.get(CAR);
-        executaLinhaCBR();
-        CAR++;
-        CBR = memoriaDeControle.get(CAR);
-        executaLinhaCBR();
-        CAR++;
-        CBR = memoriaDeControle.get(CAR);
-        executaLinhaCBR();
-
-        IR.separaInstrucao();
-        
         //este for eh utilizado APENAS para referencia da quantidade de instrucoes existentes na memoria
         //os parametros sao todos recebidos do IR
-        Iterator<Object> iterator = MemoriaPrincipal.MemoriaPrincipalBinario.iterator();
-        //for (Object obj : MemoriaPrincipal.MemoriaPrincipalBinario){
-        if(iterator.hasNext()){
-            if(iterator instanceof Instrucao){
+        
+        
+
+        for (int i = 0; i < MemoriaPrincipal.MemoriaPrincipalBinario.size(); i++){
+            Object memo = MemoriaPrincipal.MemoriaPrincipalBinario.get(i);
+
+            CAR = 0;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+            CAR++;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+            CAR++;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+            CAR++;
+            CBR = memoriaDeControle.get(CAR);
+            executaLinhaCBR();
+
+            IR.separaInstrucao();
+            
+            if(memo instanceof Instrucao){
                 //executa o ciclo de instrucao
                 //Instrucao in  = (Instrucao) obj;
+                System.out.println("ENTROU NO IF ---------------------------------------------------------------------------------------------");
                 String codigoRegistrador;
+                System.out.println(IR.opcode + ": OPCODE ATUAL");
                 switch (IR.opcode) {
                     case "00001":
                         CAR = demuxCAR.get("ADD");
                         CBR = memoriaDeControle.get(CAR);
-
+                        System.out.println("ENTROU NO ADD ------------------------------------------------------------------------");
                         codigoRegistrador = IR.P2;
                         // abre a portinha de saida do registrador cujo codigo esta no IR(P2)
                         administraCBR(codigoRegistrador,"o");
@@ -140,6 +143,7 @@ class UC {
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
+
                         break;
 
                     case "00011":                 
@@ -198,15 +202,18 @@ class UC {
                             
                         break;
 
-                    case "00101":                 
+                    case "00101":{                 
                         //1
+                        
                         CAR = demuxCAR.get("LI");
                         CBR = memoriaDeControle.get(CAR);
-                            
+                        System.out.println("COMEÇOU EXECUTAR O LI");
+                        System.out.println("CBR ANTES: " + CBR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
+                        System.out.println("CBR DEPOIS: " + CBR);
                         executaLinhaCBR();
-                        
+                    }
                         break;
 
                     case "00110":                 
@@ -443,33 +450,14 @@ class UC {
                         break;
                 }
            }
-            
-            //ciclo de busca
-            CAR = 0;
-            CBR = memoriaDeControle.get(CAR);
-            executaLinhaCBR();
-            CAR++;
-            CBR = memoriaDeControle.get(CAR);
-            executaLinhaCBR();
-            CAR++;
-            CBR = memoriaDeControle.get(CAR);
-            executaLinhaCBR();
-            CAR++;
-            CBR = memoriaDeControle.get(CAR);
-            executaLinhaCBR();
-
-           IR.separaInstrucao();
+           System.out.println("                                      VALOR S1: " + CPU.s1);
+           
         }
     }
 
     private void executaLinhaCBR(){
 
-        System.out.println("CBR: " + CBR);
-        System.out.println("PC: " + CPU.PC);
-        System.out.println("MAR: " + CPU.MAR);
-        System.out.println("Memoria: " + MemoriaPrincipal.enderecoMar);
-        System.out.println("barramento interno: " + CPU.barramentoInterno);
-        System.out.println("barramento externo: " + CPU.barramentoMemoria);
+        
 
         //barramento interno recebendo os dados dos registradores
         CPU.barramentoInterno = administraPortasDeSaidaInterna(CPU.barramentoInterno, CBR);
@@ -489,51 +477,58 @@ class UC {
 
         //sinais de controle memoria
         MemoriaPrincipal.execSinaldeControle(recebeCodigo[2]);  
+
+        System.out.println("CBR: " + CBR);
+        System.out.println("PC: " + CPU.PC);
+        System.out.println("MAR: " + CPU.MAR);
+        System.out.println("Memoria: " + MemoriaPrincipal.enderecoMar);
+        System.out.println("barramento interno: " + CPU.barramentoInterno);
+        System.out.println("barramento externo: " + CPU.barramentoMemoria);
  
     }
 
     private String administraPortasDeSaidaInterna(String barramento, String CBR){
         //System.out.println("barramento: " + barramento);
-        for(int i = 0; i < 23; i++){
-            if(CBR.charAt(i) == '1'){
+        for(int i = 1; i < 24; i++){
+            if(CBR.charAt(i-1) == '1'){
                 switch(i){
-                    case 1:{
+                    case 2:{
                         barramento = CPU.PC;
                     }break;
 
-                    case 4:{
+                    case 5:{
                         barramento = CPU.MBR;
                     }break;
 
-                    case 6:{
+                    case 7:{
                         barramento = CPU.s1;
                     }break;
 
-                    case 8:{
+                    case 9:{
                         barramento = CPU.s2;
                     }break;
 
-                    case 10:{
+                    case 11:{
                         barramento = CPU.s3;
                     }break;
 
-                    case 12:{
+                    case 13:{
                         barramento = CPU.s4;
                     }break;
 
-                    case 15:{
+                    case 16:{
                         barramento = IR.P1;
                     }break;
 
-                    case 17:{
+                    case 18:{
                         barramento = IR.P2;
                     }break;
 
-                    case 19:{
+                    case 20:{
                         barramento = IR.P3;
                     }break;
 
-                    case 22:{
+                    case 23:{
                         barramento = ULA.AC;
                     }break;
 
@@ -545,19 +540,19 @@ class UC {
 
     private String administraPortasDeSaidaExterna(String barramento, String CBR){
         //System.out.println("barramento: " + barramento);
-        for(int i = 23; i < 28; i++){
-            if(CBR.charAt(i) == '1'){
+        for(int i = 24; i < 29; i++){
+            if(CBR.charAt(i-1) == '1'){
                 switch(i){
 
-                    case 23:{
+                    case 24:{
                         barramento = CPU.MAR;
                     }break;
 
-                    case 24:{
+                    case 25:{
                         barramento = CPU.MBR;
                     }break;
 
-                    case 27:{
+                    case 28:{
                         barramento = MemoriaPrincipal.retornoMemoria;
                     }break;
 
@@ -569,60 +564,60 @@ class UC {
 
     private void administraPortasDeEntradaInterna(String barramento, String CBR){
         //System.out.println("barramento: " + barramento);
-        for(int i = 0; i < 23; i++){
-            if(CBR.charAt(i) == '1'){
+        for(int i = 1; i < 24; i++){
+            if(CBR.charAt(i-1) == '1'){
                 switch(i){
-                    case 0:{
+                    case 1:{
                         CPU.PC = barramento;
                     }break;
 
-                    case 2:{
+                    case 3:{
                         System.out.println("------"+barramento); 
                         CPU.MAR = barramento;
                         System.out.println("------ MARZAO "+CPU.MAR);
                     }break;
 
-                    case 3:{
+                    case 4:{
                         CPU.MBR = barramento;
                     }break;
 
-                    case 5:{
+                    case 6:{
                         CPU.s1 = barramento;
                     }break;
 
-                    case 7:{
+                    case 8:{
                         CPU.s2 = barramento;
                     }break;
 
-                    case 9:{
+                    case 10:{
                         CPU.s3 = barramento;
                     }break;
 
-                    case 11:{
+                    case 12:{
                         CPU.s4 = barramento;
                     }break;
 
-                    case 13:{
+                    case 14:{
                         IR.opcode = barramento;
                     }break;
 
-                    case 14:{
+                    case 15:{
                         IR.P1 = barramento;
                     }break;
 
-                    case 16:{
+                    case 17:{
                         IR.P2 = barramento;
                     }break;
 
-                    case 18:{
+                    case 19:{
                         IR.P3 = barramento;
                     }break;
 
-                    case 20:{
+                    case 21:{
                         ULA.X = barramento;
                     }break;
 
-                    case 21:{
+                    case 22:{
                         ULA.valor = barramento;
                     }break;
 
@@ -634,15 +629,15 @@ class UC {
 
     private void administraPortasDeEntradaExterna(String barramento, String CBR){
         //System.out.println("barramento: " + barramento);
-        for(int i = 23; i < 28; i++){
-            if(CBR.charAt(i) == '1'){
+        for(int i = 26; i < 29; i++){
+            if(CBR.charAt(i-1) == '1'){
                 switch(i){
 
-                    case 25:{
+                    case 26:{
                         CPU.MBR = barramento;
                     }break;
 
-                    case 26:{
+                    case 27:{
                         if(CBR.charAt(23) == '1'){  //Sabemos que ta passando enderecos
                             System.out.println("BaRRaMenTo externo: " + barramento);
                             MemoriaPrincipal.enderecoMar = Integer.toString(Integer.parseInt(barramento, 2));
@@ -700,7 +695,7 @@ class UC {
     //------------------------ciclo de busca
     memoriaDeControle.add("0110000000000000000001000000 0000 000 0 000000000");   //t1 0
     memoriaDeControle.add("0000000000000000000000010010 0001 001 0 000000000");   //t2
-    memoriaDeControle.add("1000000000000000000000100101 0000 010 0 000000000");   //t3
+    memoriaDeControle.add("1000000000000000000000100101 0000 000 0 000000000");   //t3
     memoriaDeControle.add("0000100000000100000000000000 0000 000 0 000000000");   //t4 
     
     //------------------------ciclos de execucao
@@ -728,7 +723,7 @@ class UC {
     memoriaDeControle.add("0000000000000000010000000000 0000 000 0 000000000");   //t1 16
 
     //LW
-    memoriaDeControle.add("0000000000000000000010000000 0000 000 0 000000000");   //t1 17
+    memoriaDeControle.add("0000000000000000000110000000 0000 000 0 000000000");   //t1 17
     memoriaDeControle.add("0000000000000000010001000000 0010 000 0 000000000");   //t2
     memoriaDeControle.add("0010000000000000000000100000 0000 000 0 000000000");   //t3 
     memoriaDeControle.add("0000000000000000000000010010 0000 001 0 000000000");   //t4
@@ -736,11 +731,11 @@ class UC {
     memoriaDeControle.add("0000100000000000000000000000 0000 000 0 000000000");   //t6
 
     //SW
-    memoriaDeControle.add("0000000000000000000010000000 0000 000 0 000000000");   //t3 23
-    memoriaDeControle.add("0000000000000000010001000000 0010 000 0 000000000");   //t3
+    memoriaDeControle.add("0000000000000000000110000000 0000 000 0 000000000");   //t1 23
+    memoriaDeControle.add("0000000000000000010001000000 0010 000 0 000000000");   //t2
     memoriaDeControle.add("0010000000000000000000100000 0000 000 0 000000000");   //t3 
-    memoriaDeControle.add("0001000000000000000000010010 0000 010 0 000000000");   //t4
-    memoriaDeControle.add("0000000000000000000000001010 0000 000 0 000000000");   //t5
+    memoriaDeControle.add("0001000000000000000000010010 0000 000 0 000000000");   //t4
+    memoriaDeControle.add("0000000000000000000000001010 0000 010 0 000000000");   //t5
 
     //MOVE
     memoriaDeControle.add("0000000000000000000000000000 0000 000 0 000000000");   //t1 28
