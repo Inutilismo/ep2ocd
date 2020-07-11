@@ -107,12 +107,12 @@ public class Main {
 				EP2_OCD.traduzAssembly();
 
 				CPU.inicio();
-
+/*
 				System.out.println("-------------------------------------");
 				for(Object o : MemoriaPrincipal.MemoriaPrincipalBinario) {
 					System.out.println(o);
 				}
-
+*/
 				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");//popup com mensagem de sucesso
 				
 				frame.setVisible(false);//nao mostra mais a tela anterior
@@ -181,11 +181,11 @@ public class Main {
 					
 					
 				}
-				
+/*				
 				for(Object in : MemoriaPrincipal.MemoriaPrincipalBinario) {
 					System.out.println(in);
 				}
-/*				
+				
 				System.out.println("-------------");
 				System.out.println(x);
 				System.out.println("-------------");

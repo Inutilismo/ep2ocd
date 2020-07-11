@@ -63,7 +63,6 @@ public class EP2_OCD {
     			
     			case "li": {
     				newIn.opcode = "00101";
-    				System.out.println(in);
     				newIn.parametro1 = PreencheP1(in);
     				
     				newIn.parametro2 = Integer.toBinaryString(Integer.parseInt(in.parametro2));
