@@ -1,10 +1,17 @@
 package ep2_ocd;
 
 class ULA {
+
+	//Representa o registrador X do diagrama
 	static String X = "";
+	//Armazena os valores atribuidos diretamente para a ULA
 	static String valor = "";
 	static String AC = "";
 
+	/* Metodo que simula o funcionamento de um
+	 * DEMUX das operacoes da ula baseado no 
+	 * sinal de controle recebido pelo barramento
+	 */
 	public static void executaSinalDeControle(String codigoOperacao){
 		System.out.println(codigoOperacao);
 		switch (codigoOperacao) {
@@ -53,6 +60,11 @@ class ULA {
 				break;		
 		}
 	}
+
+	/*
+	 * Os metodos abaixo realizam as operacoes que a ULA
+	 * disponibiliza e armazenam o resultado na variavel AC
+	 */
 
 	private static void incremento () {
 		System.out.println("valor em binario: "+ valor);

@@ -67,16 +67,15 @@ public class Main {
 				
 		
 		JButton btnArquivo = new JButton("Arquivo");
+		
+		//carregamento do arquivo contendo o codigo em assembly
 		btnArquivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				JFileChooser chooser = new JFileChooser();
 				chooser.showOpenDialog(null);
-				
 				File file = chooser.getSelectedFile();
 				fileName = file.getAbsolutePath();
-				
-//				FileNameExtensionFilter filter = new FileNameExtensionFilter("txt files", "txt");
-//				chooser.setFileFilter(filter);
 				
 				try {
 					FileReader reader = new FileReader(fileName);
@@ -98,30 +97,25 @@ public class Main {
 		lblNewLabel.setBounds(153, 19, 145, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
+		//Inicio do processamento do codigo, quando eh pressionado o botao
 		JButton btnProxPasso = new JButton("Próximo passo");
 		btnProxPasso.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
 
+				//Processa o codigo em assembly
 				ProcessamentoTxt(fileName);
+
+				//Traduz o codigo processado para linguagem de maquina em binario
 				EP2_OCD.traduzAssembly();
 
+				//Inicia a execucao inicial do codigo (compilacao)
 				CPU.inicio();
-/*
-				System.out.println("-------------------------------------");
-				for(Object o : MemoriaPrincipal.MemoriaPrincipalBinario) {
-					System.out.println(o);
-				}
-*/
-				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");//popup com mensagem de sucesso
-				
-				frame.setVisible(false);//nao mostra mais a tela anterior
-				
+
+				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");
+				frame.setVisible(false);
 				Janela2 janela = new Janela2();
 				janela.initialize();//roda a janela 2
-
-				
-				
 
 				/*
 				 * 
@@ -133,36 +127,37 @@ public class Main {
 			}
 		});
 			
-		
 		btnProxPasso.setBounds(129, 280, 192, 40);
 		frame.getContentPane().add(btnProxPasso);
 	}
 	
+	/* o metodo a seguir realiza o processamento do arquivo selecionado.
+	 * aqui, processar o arquivo significa escrever os vetores - declarados na
+	 * parte .data do codigo - na memoria principal e transformar cada linha
+	 * do codigo em um objeto do tipo instrucao, facilitando a traducao para
+	 * linguagem de maquina mais adiante
+	 */
 	public void ProcessamentoTxt(String fileName) {
 		try {
 			FileReader reader = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(reader);
-				
 			Scanner scan = new Scanner(br);
 			
 			while(scan.hasNext()) {
 				
 				String x = scan.nextLine();
-				
+
+				// Processamento dos vetores criados na parte .data
 				if(x.contains(".data")) {
 					
 					x = scan.nextLine();
 					
 					while(!x.contains(".text")) {
 						
-						
-						//split utilizado para separar o nome do vetor dos valores do mesmo
-						String[] aux = x.split(": .word ");//na declaracao de vetores, eh necessario que seja utilizado 'nomedovetor: .word '
-										
-						//split utilizado para separar cada valor que compoe o vetor
+						String[] aux = x.split(": .word "); //RELATORIO >>> na declaracao de vetores, eh necessario que seja utilizado 'nomedovetor: .word '
 						String[] aux2 = aux[1].split(",");
 						
-						//adiciona o primeiro item separado para conseguir a posicao dele
+						//inserimos o primeiro item do vetor e armazenamos o index dele para futuras consultas
 						MemoriaPrincipal.MemoriaPrincipalBinario.add(Integer.toBinaryString(Integer.parseInt(aux2[0])));
 						int posicao = MemoriaPrincipal.MemoriaPrincipalBinario.size()-1;
 						
@@ -174,37 +169,27 @@ public class Main {
 						//guarda o nome do vetor com a posicao do primeiro item
 						EP2_OCD.label.put(aux[0], posicao);
 						
-						//passa para a proxima linha
 						x = scan.nextLine();
-						
 					}
-					
-					
-				}
-/*				
-				for(Object in : MemoriaPrincipal.MemoriaPrincipalBinario) {
-					System.out.println(in);
 				}
 				
-				System.out.println("-------------");
-				System.out.println(x);
-				System.out.println("-------------");
-*/				
-				
-				
+				/* Processamento do codigo em si, a partir do .text
+				 * Aqui organizamos a linha do codigo em assembly em um objeto Instrucao
+				 * (onde temos um atributo para o opcode e tambem para cada parametro)
+				 * e armazenamos no ArrayList criado na classe EP2_OCD
+				 */
 				if(x.contains(".text")){
 					
 					while (scan.hasNext()){
-						x = scan.nextLine();
-						Instrucao in = new Instrucao();
-						
 
+						x = scan.nextLine();
+
+						Instrucao in = new Instrucao();
 						String[] divideOpcode = x.split(" ");
-						
-						in.opcode = divideOpcode[0];		
-						
+						in.opcode = divideOpcode[0];
+
+						//RELATORIO >>> fazer observacao sobre uso de lw e sw ( ex: SW $s1,0 (s$2))
 						String[] divideInstrucao = divideOpcode[1].split(",");
-						
 						if(in.opcode.equals("lw") || in.opcode.equals("sw") ) {
 							
 							in.parametro1 = divideInstrucao[0];
@@ -216,27 +201,13 @@ public class Main {
 							if(divideInstrucao[0] != null) in.parametro1 = divideInstrucao[0];
 							if(divideInstrucao.length >= 2 && divideInstrucao[1] != null) in.parametro2 = divideInstrucao[1];
 							if(divideInstrucao.length == 3 && divideInstrucao[2] != null) in.parametro3 = divideInstrucao[2];
-						}
 
-						EP2_OCD.MemoriaAuxiliar.add(in);
-						
+						}
+						EP2_OCD.MemoriaAuxiliar.add(in);	
 					}
 				}
-				
-			}
-/*			
-			System.out.println("MEMORIA AUXILIAR ------------------------------------------------------------------");
-			
-			for(Instrucao in : EP2_OCD.MemoriaAuxiliar) {
-				System.out.println(in);
-			}
-			
-			System.out.println("------------------------------------------------------------------");
-*/			
-			
-			
+			}			
 			br.close();
-			
 		}
 		catch(Exception ex){
 			JOptionPane.showMessageDialog (null, ex);

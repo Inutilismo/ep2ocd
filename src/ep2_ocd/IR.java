@@ -13,7 +13,7 @@ public class IR {
         IR.P3 = parametro3;
     }
 
-    //metodo que separa a String recebida do barramento no ciclo de busca
+    //metodo que separa a linha de codigo recebida do barramento durante o ciclo de busca
     public static void separaInstrucao(){
         String[] auxSplit = opcode.split(" ");
         IR.opcode = auxSplit[0];

@@ -38,6 +38,13 @@ public class Janela2 {
 		
 		//botao para a proxima micro operacao
 		JButton btnProximo = new JButton("PRÓXIMO");
+		btnProximo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+
+		});
 		btnProximo.setBounds(389, 422, 334, 44);
 		frame.getContentPane().add(btnProximo);
 		
