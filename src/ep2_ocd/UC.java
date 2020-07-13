@@ -8,12 +8,15 @@ import java.util.Iterator;
 
 class UC {
     private List<String> memoriaDeControle = new ArrayList<>();
-    private int CAR;
-    private String CBR;
+    public static int CAR;
+    public static String CBR;
     private Map<String,Integer> demuxCAR = new HashMap<>();
 
     //ArrayList que armazena todas as palavras de controle do codigo recem executado em ordem
     private List<String> codigoCompilado = new ArrayList<>();
+
+    //ArrayList que armazena todas as micro-operacoes cujas palavras de controle estao sendo executadas
+    private List<String> microInstrucao = new ArrayList<>();
     
     /*
      * Construtor que realiza a primeira
@@ -21,7 +24,7 @@ class UC {
      */
     public UC (){
         preencheMemoriaDeControle();
-        relacionaPortas();
+        //relacionaPortas();
         execucao();
     }
 
@@ -29,7 +32,7 @@ class UC {
      * Metodo que 'personaliza' a parte das portas logicas da palavra de controle armazenada no CBR
      * com os registradores especificados pelo programador do codigo em assembly
      * ("i" equivale ao input, "o" equivale ao output) e tambem a parte relacionada
-     * aos jumps
+     * aos jumps 
      */
     private void administraCBR(String codigoRegistrador, String io){
         
@@ -75,14 +78,14 @@ class UC {
 
         /* 
          * o laco for eh utilizado para limitar a execucao de comandos
-         * à quantidade de lonhas de codigo armazenadas na memoria principal
+         * à quantidade de linhas de codigo armazenadas na memoria principal
          */
 
         for (int i = 0; i < MemoriaPrincipal.MemoriaPrincipalBinario.size(); i++){
             try{
                 Instrucao memo = (Instrucao) MemoriaPrincipal.MemoriaPrincipalBinario.get(i);
             
-                System.out.println("CICLO DE BUSCA COMECO ---------------------------------------------------------------------------------------------");
+//                System.out.println("CICLO DE BUSCA COMECO ---------------------------------------------------------------------------------------------");
                 CAR = 0;
                 CBR = memoriaDeControle.get(CAR);
                 executaLinhaCBR();
@@ -93,17 +96,17 @@ class UC {
                     executaLinhaCBR();
                     codigoCompilado.add(CBR);
                 }
-                System.out.println("CICLO DE BUSCA FINAL ---------------------------------------------------------------------------------------------");
+//                System.out.println("CICLO DE BUSCA FINAL ---------------------------------------------------------------------------------------------");
 
                 IR.separaInstrucao();
-                System.out.println("OPCODE atual          :"+IR.opcode);
+//                System.out.println("OPCODE atual          :"+IR.opcode);
             
                 //Swtich que executa as instrucoes de acordo com seus ciclos de execucao
                 String codigoRegistrador;
                 switch (IR.opcode) {
 
                     case "00001":
-                        System.out.println("ADD ---------------------------------------------------------------------------------------------");
+//                        System.out.println("ADD ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("ADD");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
@@ -124,15 +127,15 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-                        break;
+*/                        break;
 
                     case "00010":
-                        System.out.println("ADDI ---------------------------------------------------------------------------------------------");
+//                        System.out.println("ADDI ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("ADDI");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
@@ -151,15 +154,15 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-                        break;
+*/                        break;
 
                     case "00011": 
-                    System.out.println("SUB ---------------------------------------------------------------------------------------------");                
+//                    System.out.println("SUB ---------------------------------------------------------------------------------------------");                
                         CAR = demuxCAR.get("SUB");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
@@ -180,15 +183,15 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-                        break;
+*/                        break;
                             
                     case "00100":                 
-                        System.out.println("SUB ---------------------------------------------------------------------------------------------");
+//                        System.out.println("SUB ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("SUBI");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
@@ -207,31 +210,30 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-                        break;
+*/                        break;
 
-                    case "00101":{                 
-                        System.out.println("LI ---------------------------------------------------------------------------------------------");
+                    case "00101":                
+//                        System.out.println("LI ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("LI");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1                                   "+CPU.s1);
                         System.out.println("S2                                   "+CPU.s2);
                         System.out.println("S3                                   "+CPU.s3);
                         System.out.println("S4                                   "+CPU.s4);
-                    }
-                        break;
+*/                        break;
 
                     case "00110":
-                    System.out.println("LW ---------------------------------------------------------------------------------------------");                 
+//                    System.out.println("LW ---------------------------------------------------------------------------------------------");                 
                         CAR = demuxCAR.get("LW");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
@@ -265,15 +267,15 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-                        break;
+*/                        break;
 
                     case "00111":  
-                    System.out.println("SW ---------------------------------------------------------------------------------------------");               
+//                    System.out.println("SW ---------------------------------------------------------------------------------------------");               
                         CAR = demuxCAR.get("SW");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
@@ -302,15 +304,15 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-                        break;
+*/                        break;
                         
                     case "01000":  
-                    System.out.println("MOVE ---------------------------------------------------------------------------------------------");               
+//                    System.out.println("MOVE ---------------------------------------------------------------------------------------------");               
                         CAR = demuxCAR.get("MOVE");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
@@ -319,15 +321,15 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4); 
-                        break;
+*/                        break;
 
                     case "01010": 
-                    System.out.println("BEQRR ---------------------------------------------------------------------------------------------");                
+//                    System.out.println("BEQRR ---------------------------------------------------------------------------------------------");                
                         CAR = demuxCAR.get("BEQrr");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
@@ -351,15 +353,15 @@ class UC {
                             codigoCompilado.add(CBR);
                             
                         }
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4); 
-                        break;
+*/                        break;
 
                     case "01001": 
-                    System.out.println("BEQRC ---------------------------------------------------------------------------------------------");                
+//                    System.out.println("BEQRC ---------------------------------------------------------------------------------------------");                
                         CAR = demuxCAR.get("BEQrc");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
@@ -379,16 +381,16 @@ class UC {
                             codigoCompilado.add(CBR);
                             
                         }
-
+                        /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
-                        System.out.println("S4:                                  "+CPU.s4);
+                        System.out.println("S4:                                  "+CPU.s4);*/
                             
                         break;
 
                     case "01100": 
-                    System.out.println("BNQRR ---------------------------------------------------------------------------------------------");                
+//                    System.out.println("BNQRR ---------------------------------------------------------------------------------------------");                
                         CAR = demuxCAR.get("BNQrr");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
@@ -411,15 +413,16 @@ class UC {
                             codigoCompilado.add(CBR);
                         }
 
+                        /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
-                        System.out.println("S4:                                  "+CPU.s4);
+                        System.out.println("S4:                                  "+CPU.s4);*/
                         break;
 
                     case "01011":                 
                         //3
-                        System.out.println("BNQrc ---------------------------------------------------------------------------------------------");
+//                        System.out.println("BNQrc ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("BNQrc");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
@@ -440,24 +443,26 @@ class UC {
                             codigoCompilado.add(CBR);                          
                         }
 
+                        /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
-                        System.out.println("S4:                                  "+CPU.s4);
+                        System.out.println("S4:                                  "+CPU.s4);*/
                         break;
 
                     case "01101":                 
-                        System.out.println("J ---------------------------------------------------------------------------------------------");
+//                        System.out.println("J ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("J");
                         CBR = memoriaDeControle.get(CAR);
                         administraCBR(null, null);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
 
+                        /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
-                        System.out.println("S4:                                  "+CPU.s4);
+                        System.out.println("S4:                                  "+CPU.s4);*/
                         break;
 
                     case "01110":                 
@@ -483,14 +488,15 @@ class UC {
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         
+                        /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
-                        System.out.println("S4:                                  "+CPU.s4);    
+                        System.out.println("S4:                                  "+CPU.s4);   */ 
                         break;
 
                     case "01111":                 
-                        System.out.println("LA ---------------------------------------------------------------------------------------------");
+//                        System.out.println("LA ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("LA");
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
@@ -513,10 +519,11 @@ class UC {
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
 
+                        /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
-                        System.out.println("S4:                                  "+CPU.s4);    
+                        System.out.println("S4:                                  "+CPU.s4);*/   
                         break;
                         
                     default:
@@ -550,12 +557,13 @@ class UC {
         //Envio do sinal de controle (se houver) para a memoria principal
         MemoriaPrincipal.execSinaldeControle(recebeCodigo[2]);  
 
+        /*
         System.out.println("CBR: " + CBR);
         System.out.println("PC: " + CPU.PC);
         System.out.println("MAR: " + CPU.MAR);
         System.out.println("Memoria: " + MemoriaPrincipal.enderecoMar);
         System.out.println("barramento interno: " + CPU.barramentoInterno);
-        System.out.println("barramento externo: " + CPU.barramentoMemoria);
+        System.out.println("barramento externo: " + CPU.barramentoMemoria);*/
  
     }
 
@@ -775,13 +783,15 @@ class UC {
     /* Metodo que preenche a memoria de controle
      * com todos os ciclos de instrucao
      * que podem ser realizados pela cpu do trabalho
+     * Preenche tambem um ArrayList auxiliar para a exibicao
+     * das micro instrucoes no display
      */
     private void preencheMemoriaDeControle(){
 
         /* Referencia para leitura das palavras de controle
          *
          * quais portas devo abrir | o que a ULA tem que fazer | sinais de controle da memória | condição de pulo | endereço de pulo
-         * 0000000000000000000000000000 0000 00 0 000000000
+         * 0000000000000000000000000000 0000 000 0 000000000
          */
         
         //------------------------ciclo de busca
@@ -886,6 +896,89 @@ class UC {
         demuxCAR.put("SLT", 42);
         demuxCAR.put("LA", 45);
         demuxCAR.put("aux", memoriaDeControle.size()-1);
+
+        //ciclo de busca
+        microInstrucao.add("t1: MAR,ULA <- PC");   //t1 0
+        microInstrucao.add("t2: (memória) <- MAR, UC('read') \nULA <- UC('soma')");   //t2
+        microInstrucao.add("t3: MBR <- (memória) \nPC <- AC");   //t3
+        microInstrucao.add("t4: IR <- MBR");   //t4 
+        
+        //------------------------ciclos de execucao
+        //ADD
+        microInstrucao.add("t1: X <- $regFonte1");   //t1 7
+        microInstrucao.add("t2: ULA <- $regFonte2, UC('soma')");   //t2
+        microInstrucao.add("t3: $regDestino <- AC");   //t3
+
+        //ADDI              
+        microInstrucao.add("t1: X <- $regFonte");   //t1 4
+        microInstrucao.add("t2: ULA <- IR(P3), UC('soma')");   //t2
+        microInstrucao.add("t3: $regDestino <- AC");   //t3 
+        
+        //SUB
+        microInstrucao.add("t1: X <- $regFonte1");   //t1 7
+        microInstrucao.add("t2: ULA <- $regFonte2, UC('subtracao')");   //t2
+        microInstrucao.add("t3: $regDestino <- AC");   //t3
+
+        //SUBI                
+        microInstrucao.add("t1: X <- $regFonte");   //t1 4
+        microInstrucao.add("t2: ULA <- IR(P3), UC('subtracao')");   //t2
+        microInstrucao.add("t3: $regDestino <- AC");   //t3 
+        
+        //LI
+        microInstrucao.add("t1: $regDestino <- IR(P2)");   //t1 16
+
+        //LW
+        microInstrucao.add("t1: X <- IR(P3)");   //t1 17
+        microInstrucao.add("t2: ULA <- IR(P2) \nULA<- UC('soma')");   //t2
+        microInstrucao.add("t3: MAR <- AC");   //t3 
+        microInstrucao.add("t4: (memória) <- MAR \n(memória) <- UC(‘read’)");   //t4
+        microInstrucao.add("t5: MBR <- (memória)");   //t5
+        microInstrucao.add("t6: $regDestino <- MBR");   //t6
+
+        //SW
+        microInstrucao.add("t1: X <- IR(P3)");   //t1 23
+        microInstrucao.add("t2: ULA <- IR(P2) \nULA<- UC('soma')");   //t2
+        microInstrucao.add("t3: MAR <- AC");   //t3 
+        microInstrucao.add("t4: MBR <- $regFonte \n(memória) <- MAR \n(memória) <- UC(‘write’)");   //t4
+        microInstrucao.add("t5: (memória) <- MBR");   //t5
+
+        //MOVE
+        microInstrucao.add("t1: $regDestino <- $regFonte");   //t1 28
+
+        //BEQrr
+        microInstrucao.add("t1: X <- $regFonte1");   //t1 29
+        microInstrucao.add("t2: ULA <- $regFonte2 \nULA <- UC('comparação de igualdade')");   //t2
+        microInstrucao.add("t3: PC <- IR(P3)");   //t3
+
+        //BEQrc
+        microInstrucao.add("t1: X <- $regFonte");   //t1 32
+        microInstrucao.add("t2: ULA <- IR(P2) \nULA <- UC('comparação de igualdade')");   //t2
+        microInstrucao.add("t3: PC <- IR(P3)");   //t3
+
+        //BNErr
+        microInstrucao.add(" X <- $regFonte1"); //t1 35
+        microInstrucao.add("ULA <- $regFonte2 \nULA <- UC('comparação de desigualdade')"); //t2
+        microInstrucao.add("PC <- IR(P3)"); //t3
+
+        //BNErc
+        microInstrucao.add("X <- $regFonte1"); //t1 38
+        microInstrucao.add("ULA <- PC(P2) \nULA <- UC('comparação de desigualdade')"); //t2
+        microInstrucao.add("PC <- IR(P3)"); //t3
+
+        //j
+        microInstrucao.add("PC <- IR(P1)"); //t1 41
+
+        //slt
+        microInstrucao.add("X <- $regFonte1");   //t1 42
+        microInstrucao.add(" ULA <- $regFonte2 \nULA <- UC('comparação de menor que')");   //t2
+        microInstrucao.add("$regDestino <- AC");   //t3
+
+        //la
+        microInstrucao.add("MAR <- IR(P2)");   //t1 45
+        microInstrucao.add("(memoria) <- MAR, UC(“comando de devolver endereco”)");   //t2
+        microInstrucao.add("MBR <- (memoria)");   //t3
+        microInstrucao.add("$regDestino <- MBR");   //t4
+
     }
 
 }
