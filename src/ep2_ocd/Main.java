@@ -123,6 +123,30 @@ public class Main {
 				 * 
 				 * 
 				 */
+				//zerar os registradores para rodar novamente mostrando na interface grafica
+				 CPU.PC = "0";
+				 CPU.s1 = "";
+				 CPU.s2 = "";
+				 CPU.s3 = "";
+				 CPU.s4 = "";
+				 /*
+				 CPU.IR.opcode = "";
+				 CPU.IR.P1 = "";
+				 CPU.IR.P2 = "";
+				 CPU.IR.P3 = "";
+				 CPU.MAR = "";
+				 CPU.MBR= "";
+				 CPU.UC.CAR = 0;
+				 CPU.UC.CBR = "";
+				 CPU.ULA.X = "";
+				 CPU.ULA.valor = "";
+				 CPU.ULA.AC = "";
+				 CPU.barramentoInterno = "";
+				 CPU.barramentoMemoria = "";
+				 MemoriaPrincipal.enderecoMar = "";
+				 MemoriaPrincipal.valorMBR = "";
+				 MemoriaPrincipal.retornoMemoria = "";*/
+
 				 
 			}
 		});

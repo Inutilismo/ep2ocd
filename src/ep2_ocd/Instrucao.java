@@ -18,8 +18,7 @@ class Instrucao {
     
     @Override
 	public String toString() {
-		return "Instrucao [opcode=" + opcode + ", parametro1=" + parametro1 + ", parametro2=" + parametro2
-				+ ", parametro3=" + parametro3 + "]";
+		return opcode + " " + parametro1 + " " + parametro2 + " " + parametro3;
 	}
 
 }

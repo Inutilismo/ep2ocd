@@ -10,13 +10,16 @@ class UC {
     private List<String> memoriaDeControle = new ArrayList<>();
     public static int CAR;
     public static String CBR;
-    private Map<String,Integer> demuxCAR = new HashMap<>();
+    public static Map<String,Integer> demuxCAR = new HashMap<>();
 
     //ArrayList que armazena todas as palavras de controle do codigo recem executado em ordem
-    private List<String> codigoCompilado = new ArrayList<>();
+    public static List<String> codigoCompilado = new ArrayList<>();
 
     //ArrayList que armazena todas as micro-operacoes cujas palavras de controle estao sendo executadas
-    private List<String> microInstrucao = new ArrayList<>();
+    public static List<String> microInstrucao = new ArrayList<>();
+
+    //ArrayList que armazena todas as micro-operacoes na ordem que foram executadas
+    public static List<String> microCompilado = new ArrayList();
     
     /*
      * Construtor que realiza a primeira
@@ -90,11 +93,14 @@ class UC {
                 CBR = memoriaDeControle.get(CAR);
                 executaLinhaCBR();
                 codigoCompilado.add(CBR);
+                microCompilado.add(microInstrucao.get(CAR));
                 for (int h = 0; h < 3; h++){
 					CAR++;
 					CBR = memoriaDeControle.get(CAR);
                     executaLinhaCBR();
                     codigoCompilado.add(CBR);
+                    microCompilado.add(microInstrucao.get(CAR));
+
                 }
 //                System.out.println("CICLO DE BUSCA FINAL ---------------------------------------------------------------------------------------------");
 
@@ -113,6 +119,7 @@ class UC {
                         administraCBR(codigoRegistrador,"o");   
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -120,6 +127,7 @@ class UC {
                         administraCBR(codigoRegistrador,"o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);                        
@@ -127,6 +135,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
@@ -142,11 +151,13 @@ class UC {
                         administraCBR(codigoRegistrador,"o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -154,6 +165,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
@@ -169,6 +181,7 @@ class UC {
                         administraCBR(codigoRegistrador,"o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -176,6 +189,7 @@ class UC {
                         administraCBR(codigoRegistrador,"o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -183,6 +197,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
@@ -198,11 +213,13 @@ class UC {
                         administraCBR(codigoRegistrador,"o");
                         executaLinhaCBR(); 
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -210,6 +227,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
@@ -225,6 +243,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1                                   "+CPU.s1);
                         System.out.println("S2                                   "+CPU.s2);
@@ -240,26 +259,31 @@ class UC {
                         administraCBR(codigoRegistrador,"o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -267,6 +291,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
@@ -282,16 +307,19 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -299,11 +327,13 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
@@ -321,6 +351,7 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 /*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
@@ -336,6 +367,7 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -343,6 +375,7 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -351,6 +384,7 @@ class UC {
                             administraCBR(null, null);
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
+                            microCompilado.add(microInstrucao.get(CAR));
                             
                         }
 /*
@@ -367,11 +401,14 @@ class UC {
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
+                        codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -379,6 +416,7 @@ class UC {
                             administraCBR(null, null);
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
+                            microCompilado.add(microInstrucao.get(CAR));
                             
                         }
                         /*
@@ -397,6 +435,7 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -404,6 +443,7 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -411,6 +451,7 @@ class UC {
                             administraCBR(null, null);
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
+                            microCompilado.add(microInstrucao.get(CAR));
                         }
 
                         /*
@@ -429,18 +470,21 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         if(ULA.AC.equals("1")) {
                             administraCBR(null, null);
                             executaLinhaCBR(); 
-                            codigoCompilado.add(CBR);                          
+                            codigoCompilado.add(CBR);
+                            microCompilado.add(microInstrucao.get(CAR));                          
                         }
 
                         /*
@@ -457,6 +501,7 @@ class UC {
                         administraCBR(null, null);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         /*
                         System.out.println("S1:                                  "+CPU.s1);
@@ -473,6 +518,7 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -480,6 +526,7 @@ class UC {
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -487,6 +534,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
                         
                         /*
                         System.out.println("S1:                                  "+CPU.s1);
@@ -501,16 +549,19 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
@@ -518,6 +569,7 @@ class UC {
                         administraCBR(codigoRegistrador, "i");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
+                        microCompilado.add(microInstrucao.get(CAR));
 
                         /*
                         System.out.println("S1:                                  "+CPU.s1);
@@ -536,7 +588,7 @@ class UC {
     /*
      * Metodo que percorre a linha armazenada no CBR e executa ela em sua totalidade
      */
-    private void executaLinhaCBR(){
+    public void executaLinhaCBR(){
 
         //Abertura de portas de saida (barramento interno)
         CPU.barramentoInterno = administraPortasDeSaidaInterna(CPU.barramentoInterno, CBR);
@@ -899,8 +951,8 @@ class UC {
 
         //ciclo de busca
         microInstrucao.add("t1: MAR,ULA <- PC");   //t1 0
-        microInstrucao.add("t2: (memória) <- MAR, UC('read') \nULA <- UC('soma')");   //t2
-        microInstrucao.add("t3: MBR <- (memória) \nPC <- AC");   //t3
+        microInstrucao.add("t2: (memória) <- MAR, UC('read') | ULA <- UC('soma')");   //t2
+        microInstrucao.add("t3: MBR <- (memória) | PC <- AC");   //t3
         microInstrucao.add("t4: IR <- MBR");   //t4 
         
         //------------------------ciclos de execucao
@@ -929,17 +981,17 @@ class UC {
 
         //LW
         microInstrucao.add("t1: X <- IR(P3)");   //t1 17
-        microInstrucao.add("t2: ULA <- IR(P2) \nULA<- UC('soma')");   //t2
+        microInstrucao.add("t2: ULA <- IR(P2) | ULA<- UC('soma')");   //t2
         microInstrucao.add("t3: MAR <- AC");   //t3 
-        microInstrucao.add("t4: (memória) <- MAR \n(memória) <- UC(‘read’)");   //t4
+        microInstrucao.add("t4: (memória) <- MAR | (memória) <- UC(‘read’)");   //t4
         microInstrucao.add("t5: MBR <- (memória)");   //t5
         microInstrucao.add("t6: $regDestino <- MBR");   //t6
 
         //SW
         microInstrucao.add("t1: X <- IR(P3)");   //t1 23
-        microInstrucao.add("t2: ULA <- IR(P2) \nULA<- UC('soma')");   //t2
+        microInstrucao.add("t2: ULA <- IR(P2) | ULA<- UC('soma')");   //t2
         microInstrucao.add("t3: MAR <- AC");   //t3 
-        microInstrucao.add("t4: MBR <- $regFonte \n(memória) <- MAR \n(memória) <- UC(‘write’)");   //t4
+        microInstrucao.add("t4: MBR <- $regFonte | (memória) <- MAR | (memória) <- UC(‘write’)");   //t4
         microInstrucao.add("t5: (memória) <- MBR");   //t5
 
         //MOVE
@@ -947,22 +999,22 @@ class UC {
 
         //BEQrr
         microInstrucao.add("t1: X <- $regFonte1");   //t1 29
-        microInstrucao.add("t2: ULA <- $regFonte2 \nULA <- UC('comparação de igualdade')");   //t2
+        microInstrucao.add("t2: ULA <- $regFonte2 | ULA <- UC('comparação de igualdade')");   //t2
         microInstrucao.add("t3: PC <- IR(P3)");   //t3
 
         //BEQrc
         microInstrucao.add("t1: X <- $regFonte");   //t1 32
-        microInstrucao.add("t2: ULA <- IR(P2) \nULA <- UC('comparação de igualdade')");   //t2
+        microInstrucao.add("t2: ULA <- IR(P2) | ULA <- UC('comparação de igualdade')");   //t2
         microInstrucao.add("t3: PC <- IR(P3)");   //t3
 
         //BNErr
         microInstrucao.add(" X <- $regFonte1"); //t1 35
-        microInstrucao.add("ULA <- $regFonte2 \nULA <- UC('comparação de desigualdade')"); //t2
+        microInstrucao.add("ULA <- $regFonte2 | ULA <- UC('comparação de desigualdade')"); //t2
         microInstrucao.add("PC <- IR(P3)"); //t3
 
         //BNErc
         microInstrucao.add("X <- $regFonte1"); //t1 38
-        microInstrucao.add("ULA <- PC(P2) \nULA <- UC('comparação de desigualdade')"); //t2
+        microInstrucao.add("ULA <- PC(P2) | ULA <- UC('comparação de desigualdade')"); //t2
         microInstrucao.add("PC <- IR(P3)"); //t3
 
         //j
@@ -970,7 +1022,7 @@ class UC {
 
         //slt
         microInstrucao.add("X <- $regFonte1");   //t1 42
-        microInstrucao.add(" ULA <- $regFonte2 \nULA <- UC('comparação de menor que')");   //t2
+        microInstrucao.add(" ULA <- $regFonte2  | ULA <- UC('comparação de menor que')");   //t2
         microInstrucao.add("$regDestino <- AC");   //t3
 
         //la

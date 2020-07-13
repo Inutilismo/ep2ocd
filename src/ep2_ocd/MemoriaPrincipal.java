@@ -72,8 +72,8 @@ public class MemoriaPrincipal {
         retornoMemoria = enderecoMar;
     }
 
-    @Override
-    public String toString(){
+    //@Override
+    public static String toStr(){
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
 
