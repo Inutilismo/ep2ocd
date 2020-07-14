@@ -76,9 +76,10 @@ public class MemoriaPrincipal {
     public static String toStr(){
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-
+        int contador = 0;
         for(Object obj : MemoriaPrincipalBinario){
-            sb.append(MemoriaPrincipalBinario.indexOf(obj) + ": " + obj + "\n");
+            sb.append(contador + ": " + obj + "\n");
+            contador ++;
         }
         return sb.toString();
     }

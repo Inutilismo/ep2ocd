@@ -12,7 +12,9 @@ public class EP2_OCD {
 	public static List<Instrucao> MemoriaAuxiliar = new ArrayList<>();
 	
 	//Map que armazena o nome e o endereco da primeira posicao dos vetores criados com .data
-    public static Map<String,Integer> label = new HashMap<>();
+	public static Map<String,Integer> label = new HashMap<>();
+	
+	public static String PCinicial;
     
     public static void main(String[] args) {
     	
@@ -80,6 +82,8 @@ public class EP2_OCD {
     				
     				int aux = Integer.parseInt(x[0])/4;
 					newIn.parametro2 = Integer.toBinaryString(aux);
+
+					System.out.println(newIn.parametro2);
 
 					if(x[1].equals("$s1")) newIn.parametro3 = "000000001";
 					else if(x[1].equals("$s2")) newIn.parametro3 = "000000010";
@@ -208,7 +212,10 @@ public class EP2_OCD {
 			
 			MemoriaPrincipal.MemoriaPrincipalBinario.add(newIn);
 			//Aqui colocamos o endereco da primeira instrucao do codigo na memoria principal no registrador PC
-			if(auxPC == 0) CPU.PC = Integer.toBinaryString(MemoriaPrincipal.MemoriaPrincipalBinario.size()-1);
+			if(auxPC == 0) {
+				CPU.PC = Integer.toBinaryString(MemoriaPrincipal.MemoriaPrincipalBinario.size()-1);
+				PCinicial =CPU.PC;
+			}
 			auxPC++;
 		}
     }

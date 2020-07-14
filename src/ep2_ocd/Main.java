@@ -1,5 +1,7 @@
 package ep2_ocd;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.awt.EventQueue;
 
@@ -19,6 +21,8 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 public class Main {
+
+	public static List<Object> backupMemoria = new ArrayList();
 	
 	static String fileName = "";
 
@@ -109,8 +113,15 @@ public class Main {
 				//Traduz o codigo processado para linguagem de maquina em binario
 				EP2_OCD.traduzAssembly();
 
+				backupMemoria.addAll(MemoriaPrincipal.MemoriaPrincipalBinario);
+
 				//Inicia a execucao inicial do codigo (compilacao)
 				CPU.inicio();
+
+				MemoriaPrincipal.MemoriaPrincipalBinario.clear();
+				MemoriaPrincipal.MemoriaPrincipalBinario.addAll(backupMemoria);
+
+				System.out.println(MemoriaPrincipal.MemoriaPrincipalBinario.toString());
 
 				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");
 				frame.setVisible(false);
@@ -124,16 +135,17 @@ public class Main {
 				 * 
 				 */
 				//zerar os registradores para rodar novamente mostrando na interface grafica
-				 CPU.PC = "0";
+				 CPU.PC = EP2_OCD.PCinicial;
 				 CPU.s1 = "";
 				 CPU.s2 = "";
 				 CPU.s3 = "";
 				 CPU.s4 = "";
-				 /*
-				 CPU.IR.opcode = "";
 				 CPU.IR.P1 = "";
 				 CPU.IR.P2 = "";
 				 CPU.IR.P3 = "";
+				 /*
+				 CPU.IR.opcode = "";
+				 
 				 CPU.MAR = "";
 				 CPU.MBR= "";
 				 CPU.UC.CAR = 0;

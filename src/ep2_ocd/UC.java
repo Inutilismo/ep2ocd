@@ -60,10 +60,12 @@ class UC {
             else if(codigoRegistrador.equals("000000100")) //s4
                 CBR = CBR.substring(0, 12) + "1" + CBR.substring(13, CBR.length()); 
         }
+
+        String[] aux = CBR.split(" ");
         
         //aqui lidamos com a parte de jump da palavra de controle
-        if(CBR.charAt(38) == '1'){
-
+        if(aux[3].equals("1")){
+            
             //se o opcode for um j
             if(IR.opcode.equals("01101")){  
                 CBR = CBR.substring(0, 40)+IR.P1;
@@ -71,8 +73,11 @@ class UC {
 
             //se for um BEQ ou um BNE
             else{    
-                CBR = CBR.substring(0, 40)+ ULA.AC;
+                CBR = CBR.substring(0, 40)+ IR.P3;
+                System.out.println("CBR: "+CBR);
             }
+
+            
         }
     }
 
@@ -252,7 +257,9 @@ class UC {
 */                        break;
 
                     case "00110":
-//                    System.out.println("LW ---------------------------------------------------------------------------------------------");                 
+//                    System.out.println("LW ---------------------------------------------------------------------------------------------"); 
+                        System.out.println("S1:                                  "+CPU.IR.P2);
+                        
                         CAR = demuxCAR.get("LW");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
@@ -292,12 +299,12 @@ class UC {
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
-/*
+
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-*/                        break;
+                        break;
 
                     case "00111":  
 //                    System.out.println("SW ---------------------------------------------------------------------------------------------");               
@@ -381,7 +388,7 @@ class UC {
                         CBR = memoriaDeControle.get(CAR);
                         if(ULA.AC.equals("1")) {
                             
-                            administraCBR(null, null);
+                            administraCBR("", "");
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
                             microCompilado.add(microInstrucao.get(CAR));
@@ -413,7 +420,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         if(ULA.AC.equals("1")) {
-                            administraCBR(null, null);
+                            administraCBR("", "");
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
                             microCompilado.add(microInstrucao.get(CAR));
@@ -448,7 +455,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         if(ULA.AC.equals("1")) {
-                            administraCBR(null, null);
+                            administraCBR("", "");
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
                             microCompilado.add(microInstrucao.get(CAR));
@@ -481,7 +488,7 @@ class UC {
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         if(ULA.AC.equals("1")) {
-                            administraCBR(null, null);
+                            administraCBR("", "");
                             executaLinhaCBR(); 
                             codigoCompilado.add(CBR);
                             microCompilado.add(microInstrucao.get(CAR));                          
@@ -498,7 +505,7 @@ class UC {
 //                        System.out.println("J ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("J");
                         CBR = memoriaDeControle.get(CAR);
-                        administraCBR(null, null);
+                        administraCBR("", "");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
@@ -608,6 +615,12 @@ class UC {
 
         //Envio do sinal de controle (se houver) para a memoria principal
         MemoriaPrincipal.execSinaldeControle(recebeCodigo[2]);  
+
+        if(CBR.charAt(38) == '1'){
+
+            CPU.PC = recebeCodigo[5];
+
+        }
 
         /*
         System.out.println("CBR: " + CBR);
