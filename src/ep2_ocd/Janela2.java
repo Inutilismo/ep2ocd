@@ -60,6 +60,12 @@ public class Janela2 {
 		JButton btnProximo = new JButton("Próximo");
 		btnProximo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*for(String c:UC.codigoCompilado){
+					System.out.println("codigocompilado: "+c);
+				}
+				for(String c:UC.microCompilado){
+					System.out.println("microCompilado: "+c);
+				}*/
 
 				String instrucaoAtual;
 				
@@ -79,17 +85,20 @@ public class Janela2 {
 						textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(0).toString() + "\n");
 						textAreaCodigo.append("Ciclo de Busca\n");
 					}
+
+					textAreaCodigo.append(CPU.UC.CBR + "	");
+					textAreaCodigo.append(CPU.UC.microCompilado.get(CPU.UC.CAR) + "\n");
+					
 					if ((contador < CPU.UC.codigoCompilado.size()-1 && CPU.UC.codigoCompilado.get(contador).equals("0110000000000000000001000000 0000 000 0 000000000"))){
 						contadorAssembly ++;
 						textAreaCodigo.append("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 						textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(contadorAssembly).toString() + "\n");
 						textAreaCodigo.append("Ciclo de Busca\n");
 					} 
+			
 					if (CPU.UC.codigoCompilado.get(contador-1).equals("0000100000000100000000000000 0000 000 0 000000000")){
 						textAreaCodigo.append("Ciclo de Execução\n");
 					} 
-					textAreaCodigo.append(CPU.UC.CBR + "	");
-					textAreaCodigo.append(CPU.UC.microCompilado.get(CPU.UC.CAR) + "\n");
 				}else{
 					JOptionPane.showMessageDialog (null, "Fim do código");
 					btnProximo.setEnabled(false);
