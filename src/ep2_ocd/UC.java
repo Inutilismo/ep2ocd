@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Iterator;
 
 class UC {
     private List<String> memoriaDeControle = new ArrayList<>();
@@ -19,7 +18,7 @@ class UC {
     public static List<String> microInstrucao = new ArrayList<>();
 
     //ArrayList que armazena todas as micro-operacoes na ordem que foram executadas
-    public static List<String> microCompilado = new ArrayList();
+    public static List<String> microCompilado = new ArrayList<>();
     
     /*
      * Construtor que realiza a primeira
@@ -88,7 +87,9 @@ class UC {
          * o laco for eh utilizado para limitar a execucao de comandos
          * à quantidade de linhas de codigo armazenadas na memoria principal
          */
-
+        
+        //int i = 0;
+        //while(i < (EP2_OCD.auxPC)+1){
         for (int i = 0; i < MemoriaPrincipal.MemoriaPrincipalBinario.size(); i++){
             try{
                 Instrucao memo = (Instrucao) MemoriaPrincipal.MemoriaPrincipalBinario.get(i);
@@ -299,12 +300,12 @@ class UC {
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
-
+/*
                         System.out.println("S1:                                  "+CPU.s1);
                         System.out.println("S2:                                  "+CPU.s2);
                         System.out.println("S3:                                  "+CPU.s3);
                         System.out.println("S4:                                  "+CPU.s4);
-                        break;
+*/                        break;
 
                     case "00111":  
 //                    System.out.println("SW ---------------------------------------------------------------------------------------------");               
@@ -384,10 +385,10 @@ class UC {
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
-                        CAR++;
-                        CBR = memoriaDeControle.get(CAR);
-                        if(ULA.AC.equals("1")) {
-                            
+                        
+                        if(CPU.ULA.AC.equals("1")) {
+                            CAR++;
+                            CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
@@ -417,9 +418,10 @@ class UC {
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
-                        CAR++;
-                        CBR = memoriaDeControle.get(CAR);
-                        if(ULA.AC.equals("1")) {
+
+                        if(CPU.ULA.AC.equals("1")) {
+                            CAR++;
+                            CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
@@ -436,7 +438,7 @@ class UC {
 
                     case "01100": 
 //                    System.out.println("BNQRR ---------------------------------------------------------------------------------------------");                
-                        CAR = demuxCAR.get("BNQrr");
+                        CAR = demuxCAR.get("BNErr");
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
@@ -452,9 +454,10 @@ class UC {
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
-                        CAR++;
-                        CBR = memoriaDeControle.get(CAR);
-                        if(ULA.AC.equals("1")) {
+                       
+                        if(CPU.ULA.AC.equals("1")) {
+                            CAR++;
+                            CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR();
                             codigoCompilado.add(CBR);
@@ -469,25 +472,27 @@ class UC {
                         break;
 
                     case "01011":                 
-                        //3
-//                        System.out.println("BNQrc ---------------------------------------------------------------------------------------------");
-                        CAR = demuxCAR.get("BNQrc");
+//                        System.out.println("BNErc ---------------------------------------------------------------------------------------------");
+                        CAR = demuxCAR.get("BNErc");
+//                        System.out.println("CAR: " + CAR + " || CBR: " + CBR); 
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
-
+//                        System.out.println("BNErc ---------------------------------------------------------------------------------------------");
                         CAR++;
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
-                        CAR++;
-                        CBR = memoriaDeControle.get(CAR);
-                        if(ULA.AC.equals("1")) {
+                        
+                        if(CPU.ULA.AC.equals("1")) {
+                            System.out.println("ENTROU NO IF DO BNE");
+                            CAR++;
+                            CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR(); 
                             codigoCompilado.add(CBR);
@@ -502,7 +507,7 @@ class UC {
                         break;
 
                     case "01101":                 
-//                        System.out.println("J ---------------------------------------------------------------------------------------------");
+                        System.out.println("J ---------------------------------------------------------------------------------------------");
                         CAR = demuxCAR.get("J");
                         CBR = memoriaDeControle.get(CAR);
                         administraCBR("", "");
@@ -589,6 +594,7 @@ class UC {
                         break;
                 }
            } catch(Exception e){}
+           //i++;
         }
     }
 
@@ -616,11 +622,11 @@ class UC {
         //Envio do sinal de controle (se houver) para a memoria principal
         MemoriaPrincipal.execSinaldeControle(recebeCodigo[2]);  
 
-        if(CBR.charAt(38) == '1'){
+        /*if(CBR.charAt(38) == '1'){
 
             CPU.PC = recebeCodigo[5];
 
-        }
+        }*/
 
         /*
         System.out.println("CBR: " + CBR);
@@ -1021,28 +1027,28 @@ class UC {
         microInstrucao.add("t3: PC <- IR(P3)");   //t3
 
         //BNErr
-        microInstrucao.add(" X <- $regFonte1"); //t1 35
-        microInstrucao.add("ULA <- $regFonte2 | ULA <- UC('comparação de desigualdade')"); //t2
-        microInstrucao.add("PC <- IR(P3)"); //t3
+        microInstrucao.add("t1: X <- $regFonte1"); //t1 35
+        microInstrucao.add("t2: ULA <- $regFonte2 | ULA <- UC('comparação de desigualdade')"); //t2
+        microInstrucao.add("t3: PC <- IR(P3)"); //t3
 
         //BNErc
-        microInstrucao.add("X <- $regFonte1"); //t1 38
-        microInstrucao.add("ULA <- PC(P2) | ULA <- UC('comparação de desigualdade')"); //t2
-        microInstrucao.add("PC <- IR(P3)"); //t3
+        microInstrucao.add("t1: X <- $regFonte1"); //t1 38
+        microInstrucao.add("t2: ULA <- PC(P2) | ULA <- UC('comparação de desigualdade')"); //t2
+        microInstrucao.add("t3: PC <- IR(P3)"); //t3
 
         //j
-        microInstrucao.add("PC <- IR(P1)"); //t1 41
+        microInstrucao.add("t1:PC <- IR(P1)"); //t1 41
 
         //slt
-        microInstrucao.add("X <- $regFonte1");   //t1 42
-        microInstrucao.add(" ULA <- $regFonte2  | ULA <- UC('comparação de menor que')");   //t2
-        microInstrucao.add("$regDestino <- AC");   //t3
+        microInstrucao.add("t1:X <- $regFonte1");   //t1 42
+        microInstrucao.add("t2: ULA <- $regFonte2  | ULA <- UC('comparação de menor que')");   //t2
+        microInstrucao.add("t3: $regDestino <- AC");   //t3
 
         //la
-        microInstrucao.add("MAR <- IR(P2)");   //t1 45
-        microInstrucao.add("(memoria) <- MAR, UC(“comando de devolver endereco”)");   //t2
-        microInstrucao.add("MBR <- (memoria)");   //t3
-        microInstrucao.add("$regDestino <- MBR");   //t4
+        microInstrucao.add("t1: MAR <- IR(P2)");   //t1 45
+        microInstrucao.add("t2: (memoria) <- MAR, UC(“comando de devolver endereco”)");   //t2
+        microInstrucao.add("t3: MBR <- (memoria)");   //t3
+        microInstrucao.add("t4: $regDestino <- MBR");   //t4
 
     }
 

@@ -15,6 +15,8 @@ public class EP2_OCD {
 	public static Map<String,Integer> label = new HashMap<>();
 	
 	public static String PCinicial;
+
+	public static int auxPC = 0;
     
     public static void main(String[] args) {
     	
@@ -27,7 +29,7 @@ public class EP2_OCD {
     public static void traduzAssembly(){
 
 		//variavel pra indicar qual linha contem a primeira instrucao de assembly a ser executada
-		int auxPC = 0;
+		
 		
     	for(Instrucao in : MemoriaAuxiliar) {
 

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
 import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Janela2 {
-
 	static int contador = 0;
 	static int contadorAssembly = 0;
 
@@ -46,12 +46,18 @@ public class Janela2 {
 		scrollPaneCodigo.setBounds(17, 41, 508, 249);
 		frame.getContentPane().add(scrollPaneCodigo);
 
+		DefaultCaret caret = (DefaultCaret) textAreaCodigo.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
 		JTextArea textAreaMemoria = new JTextArea();
 		textAreaMemoria.setEditable(false);
 
 		JScrollPane scrollPaneMemoria = new JScrollPane(textAreaMemoria);
 		scrollPaneMemoria.setBounds(16, 333, 508, 201);
 		frame.getContentPane().add(scrollPaneMemoria);
+
+		DefaultCaret caret2 = (DefaultCaret) textAreaMemoria.getCaret();
+		caret2.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 
 		JButton btnProximo = new JButton("Próximo");
 		btnProximo.addActionListener(new ActionListener() {
@@ -91,7 +97,8 @@ public class Janela2 {
 					if ((contador < CPU.UC.codigoCompilado.size()-1 && CPU.UC.codigoCompilado.get(contador).equals("0110000000000000000001000000 0000 000 0 000000000"))){
 						contadorAssembly ++; //contador para saber qual a instrucao a ser mostrada
 						textAreaCodigo.append("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-						textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(contadorAssembly).toString() + "\n"); //mostra a instrucao atual
+						textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(Integer.parseInt(CPU.PC, 2) - Integer.parseInt(EP2_OCD.PCinicial, 2)).toString() + "\n");//mostra a instrucao em assembly
+						//textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(contadorAssembly).toString() + "\n"); //mostra a instrucao atual
 						textAreaCodigo.append("Ciclo de Busca\n");
 					} 
 					//checa se esta na ultima micro operacao do ciclo de busca para indicar o comeco do ciclo de execucao

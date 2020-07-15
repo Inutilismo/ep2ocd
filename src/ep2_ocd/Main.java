@@ -118,6 +118,19 @@ public class Main {
 				//Inicia a execucao inicial do codigo (compilacao)
 				CPU.inicio();
 
+				int cont = 0;
+				System.out.println("CODIGO COMPILADO");
+				for (String x : UC.codigoCompilado){
+					System.out.println(cont + ": " + x);
+					cont++;
+				}
+				cont = 0;
+				System.out.println("MICRO COMPILADO");
+				for (String x : UC.microCompilado){
+					System.out.println(cont + ": " + x);
+					cont++;
+				}
+
 				MemoriaPrincipal.MemoriaPrincipalBinario.clear();
 				MemoriaPrincipal.MemoriaPrincipalBinario.addAll(backupMemoria);
 
