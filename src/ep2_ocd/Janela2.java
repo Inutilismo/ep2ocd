@@ -62,12 +62,6 @@ public class Janela2 {
 		JButton btnProximo = new JButton("Próximo");
 		btnProximo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*for(String c:UC.codigoCompilado){
-					System.out.println("codigocompilado: "+c);
-				}
-				for(String c:UC.microCompilado){
-					System.out.println("microCompilado: "+c);
-				}*/
 
 				String instrucaoAtual;
 				
@@ -78,10 +72,8 @@ public class Janela2 {
 					CPU.UC.CBR = CPU.UC.codigoCompilado.get(CPU.UC.CAR); //a palavra de controle a ser executada
 					CPU.UC.executaLinhaCBR();
 					
-					//mostra a memoria no campo de texto
 					textAreaMemoria.setText(MemoriaPrincipal.toStr());
 					
-					//mostra os registradores e valores 
 					textAreaRegistradores.setText(CPU.toSTR());
 
 					//mostra a instrucao atual e indicar o ciclo de busca (na primeira vez)
@@ -90,25 +82,29 @@ public class Janela2 {
 						textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(0).toString() + "\n");//mostra a instrucao em assembly
 						textAreaCodigo.append("Ciclo de Busca\n");
 					}
+
 					//mostra a palavra de controle e a micro operacao
 					textAreaCodigo.append(CPU.UC.CBR + "	");
 					textAreaCodigo.append(CPU.UC.microCompilado.get(CPU.UC.CAR) + "\n");
+
 					//checa se a proxima micro operacao eh o ciclo de busca
 					if ((contador < CPU.UC.codigoCompilado.size()-1 && CPU.UC.codigoCompilado.get(contador).equals("0110000000000000000001000000 0000 000 0 000000000"))){
+
 						contadorAssembly ++; //contador para saber qual a instrucao a ser mostrada
 						textAreaCodigo.append("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 						textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(Integer.parseInt(CPU.PC, 2) - Integer.parseInt(EP2_OCD.PCinicial, 2)).toString() + "\n");//mostra a instrucao em assembly
-						//textAreaCodigo.append(EP2_OCD.MemoriaAuxiliar.get(contadorAssembly).toString() + "\n"); //mostra a instrucao atual
 						textAreaCodigo.append("Ciclo de Busca\n");
 					} 
+
 					//checa se esta na ultima micro operacao do ciclo de busca para indicar o comeco do ciclo de execucao
 					if (CPU.UC.codigoCompilado.get(contador-1).equals("0000100000000100000000000000 0000 000 0 000000000")){
 						IR.separaInstrucao();
 						textAreaCodigo.append("Ciclo de Execução\n"); 
 					} 
+
 				}else{ //fim do codigo
-					JOptionPane.showMessageDialog (null, "Fim do código");//pop up
-					btnProximo.setEnabled(false);//desabilita o botao
+					JOptionPane.showMessageDialog (null, "Fim do código");
+					btnProximo.setEnabled(false);
 				}
 			}
 		});

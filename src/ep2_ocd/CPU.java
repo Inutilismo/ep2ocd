@@ -17,7 +17,6 @@ public class CPU {
         UC = new UC();
     }
 
-//    @Override
     public static String toSTR(){
         StringBuilder sb = new StringBuilder();
         sb.append("\n");

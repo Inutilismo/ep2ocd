@@ -44,14 +44,6 @@ public class MemoriaPrincipal {
 
     public static void read(){
 
-        //print da memoria completa
-        /*
-       for(int i = 0; i<MemoriaPrincipalBinario.size(); i++){
-            System.out.println("MEMORIA:                           " + MemoriaPrincipalBinario.get(i));
-        }
-        */
-        //System.out.println("mar que a memoria recebeu: " + enderecoMar);
-
         //checa se o comando read foi chamado para retornar um codigo em assembly
         if(MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar)) instanceof Instrucao){
             Instrucao aux = (Instrucao) MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar));
@@ -72,7 +64,6 @@ public class MemoriaPrincipal {
         retornoMemoria = enderecoMar;
     }
 
-    //@Override
     public static String toStr(){
         StringBuilder sb = new StringBuilder();
         sb.append("\n");

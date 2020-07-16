@@ -13,10 +13,9 @@ class ULA {
 	 * sinal de controle recebido pelo barramento
 	 */
 	public static void executaSinalDeControle(String codigoOperacao){
-//		System.out.println(codigoOperacao);
 		switch (codigoOperacao) {
 			case "0000":
-				//nao faz nada
+				
 				break;
 
 			case "0001":
@@ -67,8 +66,7 @@ class ULA {
 	 */
 
 	private static void incremento () {
-//		System.out.println("valor em binario: "+ valor);
-//		System.out.println("valor em decimal: "+Integer.parseInt(valor, 2));
+
 		AC = Integer.toBinaryString(Integer.parseInt(valor, 2) + 1);
 	}
 	

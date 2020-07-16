@@ -55,8 +55,6 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-//		final String fileName = "";
-//		frame.setVisible(true);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 361);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,7 +65,7 @@ public class Main {
 		JScrollPane scrollPane = new JScrollPane(textAreaPreview);
 		scrollPane.setBounds(29, 93, 404, 168);
 		frame.getContentPane().add(scrollPane);
-		textAreaPreview.setEditable(false);//------------------------------------
+		textAreaPreview.setEditable(false);
 				
 		
 		JButton btnArquivo = new JButton("Arquivo");
@@ -118,23 +116,8 @@ public class Main {
 				//Inicia a execucao inicial do codigo (compilacao)
 				CPU.inicio();
 
-				int cont = 0;
-				System.out.println("CODIGO COMPILADO");
-				for (String x : UC.codigoCompilado){
-					System.out.println(cont + ": " + x);
-					cont++;
-				}
-				cont = 0;
-				System.out.println("MICRO COMPILADO");
-				for (String x : UC.microCompilado){
-					System.out.println(cont + ": " + x);
-					cont++;
-				}
-
 				MemoriaPrincipal.MemoriaPrincipalBinario.clear();
 				MemoriaPrincipal.MemoriaPrincipalBinario.addAll(backupMemoria);
-
-				System.out.println(MemoriaPrincipal.MemoriaPrincipalBinario.toString());
 
 				JOptionPane.showMessageDialog (null, "Codigo carregado com sucesso!");
 				frame.setVisible(false);
@@ -156,21 +139,6 @@ public class Main {
 				 CPU.IR.P1 = "";
 				 CPU.IR.P2 = "";
 				 CPU.IR.P3 = "";
-				 /*
-				 CPU.IR.opcode = "";
-				 
-				 CPU.MAR = "";
-				 CPU.MBR= "";
-				 CPU.UC.CAR = 0;
-				 CPU.UC.CBR = "";
-				 CPU.ULA.X = "";
-				 CPU.ULA.valor = "";
-				 CPU.ULA.AC = "";
-				 CPU.barramentoInterno = "";
-				 CPU.barramentoMemoria = "";
-				 MemoriaPrincipal.enderecoMar = "";
-				 MemoriaPrincipal.valorMBR = "";
-				 MemoriaPrincipal.retornoMemoria = "";*/
 
 				 
 			}
@@ -237,7 +205,6 @@ public class Main {
 						String[] divideOpcode = x.split(" ");
 						in.opcode = divideOpcode[0];
 
-						//RELATORIO >>> fazer observacao sobre uso de lw e sw ( ex: SW $s1,0 (s$2))
 						String[] divideInstrucao = divideOpcode[1].split(",");
 						if(in.opcode.equals("lw") || in.opcode.equals("sw") ) {
 							

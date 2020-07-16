@@ -14,8 +14,10 @@ public class EP2_OCD {
 	//Map que armazena o nome e o endereco da primeira posicao dos vetores criados com .data
 	public static Map<String,Integer> label = new HashMap<>();
 	
+	//Armazena o valor inicial do registrador PC
 	public static String PCinicial;
 
+	//utilizado para auxiliar na atribuicao do valor inicial do pc
 	public static int auxPC = 0;
     
     public static void main(String[] args) {
@@ -27,9 +29,6 @@ public class EP2_OCD {
 	 * para linguagem de maquina em binario
 	 */
     public static void traduzAssembly(){
-
-		//variavel pra indicar qual linha contem a primeira instrucao de assembly a ser executada
-		
 		
     	for(Instrucao in : MemoriaAuxiliar) {
 
@@ -85,8 +84,6 @@ public class EP2_OCD {
     				int aux = Integer.parseInt(x[0])/4;
 					newIn.parametro2 = Integer.toBinaryString(aux);
 
-					System.out.println(newIn.parametro2);
-
 					if(x[1].equals("$s1")) newIn.parametro3 = "000000001";
 					else if(x[1].equals("$s2")) newIn.parametro3 = "000000010";
 					else if(x[1].equals("$s3")) newIn.parametro3 = "000000011";
@@ -98,7 +95,7 @@ public class EP2_OCD {
     				newIn.opcode = "00111";
     				newIn.parametro1 = PreencheP1(in);
     				
-    				String[] x = in.parametro2.split(" ");	//[16,(endere�o de mem�ria que indica o label)]
+    				String[] x = in.parametro2.split(" ");	
     				x[1] = x[1].substring(1, x[1].length()-1);
     				
     				int aux = Integer.parseInt(x[0])/4;
