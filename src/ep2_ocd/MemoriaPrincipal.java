@@ -49,7 +49,7 @@ public class MemoriaPrincipal {
             Instrucao aux = (Instrucao) MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar));
             retornoMemoria = aux.opcode + " " + aux.parametro1 + " " + aux.parametro2 + " " + aux.parametro3;
         }
-        //ou um valor qualquer aramzenado
+        //ou um valor qualquer armzenado
         else {
             retornoMemoria = (String) MemoriaPrincipalBinario.get(Integer.parseInt(enderecoMar));
         }

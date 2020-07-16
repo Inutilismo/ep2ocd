@@ -912,7 +912,7 @@ class UC {
 
         //la
         microInstrucao.add("t1: MAR <- IR(P2)");   //t1 45
-        microInstrucao.add("t2: (memoria) <- MAR, UC(“comando de devolver endereco”)");   //t2
+        microInstrucao.add("t2: (memoria) <- MAR, UC('comando de devolver endereco')");   //t2
         microInstrucao.add("t3: MBR <- (memoria)");   //t3
         microInstrucao.add("t4: $regDestino <- MBR");   //t4
 

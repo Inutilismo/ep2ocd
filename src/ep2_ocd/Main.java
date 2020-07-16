@@ -95,7 +95,7 @@ public class Main {
 		btnArquivo.setBounds(167, 49, 117, 29);
 		frame.getContentPane().add(btnArquivo);
 		
-		JLabel lblNewLabel = new JLabel("Escolha um arquivo txt");
+		JLabel lblNewLabel = new JLabel("Escolha um arquivo em assembly: ");
 		lblNewLabel.setBounds(153, 19, 145, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
