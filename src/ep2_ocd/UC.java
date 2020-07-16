@@ -90,9 +90,16 @@ class UC {
         
         //int i = 0;
         //while(i < (EP2_OCD.auxPC)+1){
-        for (int i = 0; i < MemoriaPrincipal.MemoriaPrincipalBinario.size(); i++){
+        //for (int i = 0; i < MemoriaPrincipal.MemoriaPrincipalBinario.size(); i++){
+        for (int i = 0; i < MemoriaPrincipal.MemoriaPrincipalBinario.size() || Integer.parseInt(CPU.PC,2) < MemoriaPrincipal.MemoriaPrincipalBinario.size(); i = Integer.parseInt(CPU.PC,2)){
             try{
-                Instrucao memo = (Instrucao) MemoriaPrincipal.MemoriaPrincipalBinario.get(i);
+/*                if(i >= MemoriaPrincipal.MemoriaPrincipalBinario.size()){
+                    if(IR.opcode.equals("01011") || IR.opcode.equals("01100") || 
+                    IR.opcode.equals("01010") || IR.opcode.equals("01001")){
+                        i = CPU.PC;
+                    }
+                } 
+*/                Instrucao memo = (Instrucao) MemoriaPrincipal.MemoriaPrincipalBinario.get(i);
             
 //                System.out.println("CICLO DE BUSCA COMECO ---------------------------------------------------------------------------------------------");
                 CAR = 0;
@@ -591,9 +598,12 @@ class UC {
                         break;
                         
                     default:
+                    
                         break;
                 }
-           } catch(Exception e){}
+            } catch(Exception e){
+              
+            }
            //i++;
         }
     }

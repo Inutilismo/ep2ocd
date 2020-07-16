@@ -124,19 +124,19 @@ public class EP2_OCD {
 					
 					//verifica se foi usado BEQrr
     				if(in.parametro2.contains("$s")) {
-	    				if(in.parametro2 == "$s1") {
+	    				if(in.parametro2.equals("$s1")) {
 	    					newIn.parametro2 = "000000001";
 	    					newIn.opcode = "01010";
 	    				}
-	    				else if(in.parametro2 == "$s2") {
+	    				else if(in.parametro2.equals("$s2")) {
 	    					newIn.parametro2 = "000000010";
 	    					newIn.opcode = "01010";
 	    				}
-	    				else if(in.parametro2 == "$s3") {
+	    				else if(in.parametro2.equals("$s3")) {
 	    					newIn.parametro2 = "000000011";
 	    					newIn.opcode = "01010";
 	    				}
-	    				else if(in.parametro2 == "$s4") {
+	    				else if(in.parametro2.equals("$s4")) {
 	    					newIn.parametro2 = "000000100";
 	    					newIn.opcode = "01010";
 	    				}
@@ -158,19 +158,19 @@ public class EP2_OCD {
 					
 					//verifica se foi usado BNQrr
     				if(in.parametro2.contains("$s")) {
-	    				if(in.parametro2 == "$s1") {
+	    				if(in.parametro2.equals("$s1")) {
 	    					newIn.parametro2 = "000000001";
 	    					newIn.opcode = "01100";
 	    				}
-	    				else if(in.parametro2 == "$s2") {
+	    				else if(in.parametro2.equals("$s2")) {
 	    					newIn.parametro2 = "000000010";
 	    					newIn.opcode = "01100";
 	    				}
-	    				else if(in.parametro2 == "$s3") {
+	    				else if(in.parametro2.equals("$s3")) {
 	    					newIn.parametro2 = "000000011";
 	    					newIn.opcode = "01100";
 	    				}
-	    				else if(in.parametro2 == "$s4") {
+	    				else if(in.parametro2.equals("$s4")) {
 	    					newIn.parametro2 = "000000100";
 	    					newIn.opcode = "01100";
 	    				}
