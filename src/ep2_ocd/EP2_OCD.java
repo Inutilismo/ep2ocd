@@ -203,7 +203,7 @@ public class EP2_OCD {
     			
     			case "la": {
     				newIn.opcode = "01111";
-    				newIn.parametro1 = PreencheP1(in);
+					newIn.parametro1 = PreencheP1(in);
     				newIn.parametro2 = Integer.toBinaryString(label.get(in.parametro2));
 				}break;
 				

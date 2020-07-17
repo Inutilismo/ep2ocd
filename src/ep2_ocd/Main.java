@@ -130,9 +130,7 @@ public class Main {
 				 * 
 				 * 
 				 */
-				for(int i : UC.valoresCAR){
-					System.out.println("CAR: "+i);
-				}
+				
 				//zerar os registradores para rodar novamente mostrando na interface grafica
 				 CPU.PC = EP2_OCD.PCinicial;
 				 CPU.s1 = "";
