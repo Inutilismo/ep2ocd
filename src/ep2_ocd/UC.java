@@ -17,8 +17,11 @@ class UC {
     //ArrayList que armazena todas as micro-operacoes cujas palavras de controle estao sendo executadas
     public static List<String> microInstrucao = new ArrayList<>();
 
-    //ArrayList que armazena todas as micro-operacoes na ordem que foram executadas
+    //ArrayList que armazena todas as micro-operacoes (em palavra, ao invés de binário) na ordem que foram executadas
     public static List<String> microCompilado = new ArrayList<>();
+
+    //ArrayList que auxilia na exibicao dos valores do CAR
+    public static List<Integer> valoresCAR = new ArrayList<>();
     
     /*
      * Construtor que realiza a primeira
@@ -92,12 +95,14 @@ class UC {
                Instrucao memo = (Instrucao) MemoriaPrincipal.MemoriaPrincipalBinario.get(i);
             
                 CAR = 0;
+                valoresCAR.add(CAR);
                 CBR = memoriaDeControle.get(CAR);
                 executaLinhaCBR();
                 codigoCompilado.add(CBR);
                 microCompilado.add(microInstrucao.get(CAR));
                 for (int h = 0; h < 3; h++){
-					CAR++;
+                    CAR++;
+                    valoresCAR.add(CAR);
 					CBR = memoriaDeControle.get(CAR);
                     executaLinhaCBR();
                     codigoCompilado.add(CBR);
@@ -114,6 +119,7 @@ class UC {
                     case "00001":
 
                         CAR = demuxCAR.get("ADD");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador,"o");   
@@ -122,6 +128,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador,"o");
@@ -130,6 +137,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);                        
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -142,6 +150,7 @@ class UC {
                     case "00010":
 
                         CAR = demuxCAR.get("ADDI");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador,"o");
@@ -150,12 +159,14 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -168,6 +179,7 @@ class UC {
                     case "00011": 
               
                         CAR = demuxCAR.get("SUB");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador,"o");
@@ -176,6 +188,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador,"o");
@@ -184,6 +197,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -196,6 +210,7 @@ class UC {
                     case "00100":                 
 
                         CAR = demuxCAR.get("SUBI");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador,"o");
@@ -204,12 +219,14 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -222,6 +239,7 @@ class UC {
                     case "00101":                
 
                         CAR = demuxCAR.get("LI");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -234,6 +252,7 @@ class UC {
                     case "00110":
                         
                         CAR = demuxCAR.get("LW");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador,"o");
@@ -242,30 +261,35 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -278,6 +302,7 @@ class UC {
                     case "00111":  
               
                         CAR = demuxCAR.get("SW");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador, "o");
@@ -286,18 +311,21 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
@@ -306,6 +334,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
@@ -316,6 +345,7 @@ class UC {
                     case "01000":  
               
                         CAR = demuxCAR.get("MOVE");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -330,6 +360,7 @@ class UC {
                     case "01010": 
                
                         CAR = demuxCAR.get("BEQrr");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
@@ -338,6 +369,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador, "o");
@@ -348,6 +380,7 @@ class UC {
                         
                         if(CPU.ULA.AC.equals("1")) {
                             CAR++;
+                            valoresCAR.add(CAR);
                             CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR();
@@ -361,6 +394,7 @@ class UC {
                     case "01001": 
                 
                         CAR = demuxCAR.get("BEQrc");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
@@ -369,6 +403,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
@@ -377,6 +412,7 @@ class UC {
 
                         if(CPU.ULA.AC.equals("1")) {
                             CAR++;
+                            valoresCAR.add(CAR);
                             CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR();
@@ -389,6 +425,7 @@ class UC {
 
                     case "01100":                 
                         CAR = demuxCAR.get("BNErr");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
@@ -397,6 +434,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador, "o");
@@ -407,6 +445,7 @@ class UC {
                        
                         if(CPU.ULA.AC.equals("1")) {
                             CAR++;
+                            valoresCAR.add(CAR);
                             CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR();
@@ -418,13 +457,16 @@ class UC {
 
                     case "01011":                 
                         CAR = demuxCAR.get("BNErc");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "o");
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
+                        
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
@@ -433,6 +475,7 @@ class UC {
                         
                         if(CPU.ULA.AC.equals("1")) {
                             CAR++;
+                            valoresCAR.add(CAR);
                             CBR = memoriaDeControle.get(CAR);
                             administraCBR("", "");
                             executaLinhaCBR(); 
@@ -444,6 +487,7 @@ class UC {
 
                     case "01101":                 
                         CAR = demuxCAR.get("J");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         administraCBR("", "");
                         executaLinhaCBR();
@@ -454,6 +498,7 @@ class UC {
 
                     case "01110":                 
                         CAR = demuxCAR.get("SLT");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P2;
                         administraCBR(codigoRegistrador, "o");
@@ -462,6 +507,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P3;
                         administraCBR(codigoRegistrador, "o");
@@ -470,6 +516,7 @@ class UC {
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");
@@ -482,24 +529,28 @@ class UC {
                     case "01111":                 
 
                         CAR = demuxCAR.get("LA");
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         executaLinhaCBR();
                         codigoCompilado.add(CBR);
                         microCompilado.add(microInstrucao.get(CAR));
 
                         CAR++;
+                        valoresCAR.add(CAR);
                         CBR = memoriaDeControle.get(CAR);
                         codigoRegistrador = IR.P1;
                         administraCBR(codigoRegistrador, "i");

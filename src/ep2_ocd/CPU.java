@@ -35,7 +35,7 @@ public class CPU {
             "     IR(P2): " + IR.P2 +"\n" + 
             "     IR(P3): " + IR.P3 + "\n");
         sb.append("     ULA: " + ULA.valor + "\n" + "     ULA(X): " + ULA.X + "\n" + "     ULA(AC): " + ULA.AC + "\n");
-        sb.append("     UC(CAR): " + UC.CAR + "\n" + "     UC(CBR):" + "\n");
+        sb.append("     UC(CBR):" + "\n" + UC.CBR);
         sb.append("\n");
         
         return sb.toString();

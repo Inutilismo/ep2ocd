@@ -95,7 +95,7 @@ public class Main {
 		btnArquivo.setBounds(167, 49, 117, 29);
 		frame.getContentPane().add(btnArquivo);
 		
-		JLabel lblNewLabel = new JLabel("Escolha um arquivo em assembly: ");
+		JLabel lblNewLabel = new JLabel("Escolha um arquivo: ");
 		lblNewLabel.setBounds(153, 19, 145, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -130,6 +130,9 @@ public class Main {
 				 * 
 				 * 
 				 */
+				for(int i : UC.valoresCAR){
+					System.out.println("CAR: "+i);
+				}
 				//zerar os registradores para rodar novamente mostrando na interface grafica
 				 CPU.PC = EP2_OCD.PCinicial;
 				 CPU.s1 = "";

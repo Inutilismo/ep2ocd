@@ -75,6 +75,7 @@ public class Janela2 {
 					textAreaMemoria.setText(MemoriaPrincipal.toStr());
 					
 					textAreaRegistradores.setText(CPU.toSTR());
+					textAreaRegistradores.append("     UC(CAR): " + Integer.toString(UC.valoresCAR.get(CPU.UC.CAR)));
 
 					//mostra a instrucao atual e indicar o ciclo de busca (na primeira vez)
 					if(contador == 1){
